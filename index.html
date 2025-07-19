@@ -3,150 +3,129 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Image Printers | Best Printing Press in Hyderabad</title>
-
-  <!-- SEO Meta -->
-  <meta name="description" content="Image Printers is the best printing press in Hyderabad near SR Nagar, Ameerpet, Balkampet. We specialize in hospital letterheads, lab reports, pharma brochures, diaries, and medical printing.">
-  <meta name="keywords" content="printing press hyderabad, printers in SR Nagar, offset printing ameerpet, digital printing jubilee hills, pharma brochure printing, hospital letterhead printing, lab report printing, diary printing, flex banner printing, best printing near me, medical printing, Hyderabad, Balkampet, Punjagutta, Erragadda, Yousufguda, Nature Cure Hospital, KPHB, Kukatpally, Mehdipatnam, Somajiguda, Banjara Hills">
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-
+  <title>Image Printers - Hyderabad</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" />
   <style>
-    html {
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background-color: #f8f9fa;
       scroll-behavior: smooth;
     }
 
-    body {
-      font-family: 'Inter', sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f8f9fb url('logo.jpg') no-repeat center center fixed;
-      background-size: 450px;
-      color: #333;
+    header {
+      background: url('logo10.jpeg') center center/cover no-repeat;
+      color: white;
+      text-align: center;
+      padding: 60px 20px;
+      position: relative;
+    }
+
+    header::after {
+      content: "";
+      background-color: rgba(0, 0, 0, 0.6);
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+    }
+
+    header h1,
+    header p {
+      position: relative;
+      z-index: 1;
+    }
+
+    .logo-top {
+      width: 80px;
+      height: auto;
+      border-radius: 10px;
     }
 
     nav {
-      background: #1a237e;
-      padding: 1rem;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
+      background-color: #343a40;
       display: flex;
       justify-content: center;
+      flex-wrap: wrap;
     }
 
     nav a {
       color: white;
+      padding: 15px 20px;
       text-decoration: none;
-      margin: 0 1rem;
-      font-weight: 600;
-      font-size: 1rem;
+      font-weight: 500;
     }
 
     nav a:hover {
-      text-decoration: underline;
-    }
-
-    header {
-      text-align: center;
-      background-color: rgba(255, 255, 255, 0.9);
-      padding: 2rem 1rem;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    header img.logo {
-      max-width: 120px;
-      margin-bottom: 1rem;
-      border-radius: 12px;
-    }
-
-    header h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.5rem;
-      margin: 0;
-      color: #1a237e;
-    }
-
-    header p {
-      margin-top: 0.5rem;
-      font-size: 1.1rem;
-      color: #444;
-    }
-
-    main {
-      max-width: 1100px;
-      margin: 2rem auto;
-      padding: 0 1rem;
+      background-color: #495057;
     }
 
     section {
-      background: #fff;
-      padding: 1.5rem 2rem;
-      border-radius: 12px;
-      margin-bottom: 2rem;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      padding: 40px 20px;
+      max-width: 900px;
+      margin: auto;
     }
 
-    h2 {
-      color: #0d47a1;
-      font-size: 1.8rem;
-      margin-bottom: 1rem;
-      border-bottom: 2px solid #e0e0e0;
-      padding-bottom: 0.5rem;
+    section h2 {
+      color: #1a73e8;
+      margin-bottom: 10px;
     }
 
     ul {
-      list-style: disc;
-      padding-left: 1.2rem;
+      list-style-type: disc;
+      padding-left: 20px;
     }
 
-    ul li {
-      margin-bottom: 0.5rem;
-    }
-
-    a {
-      color: #0d47a1;
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    .cta-btn {
-      display: inline-block;
-      background-color: #1a73e8;
+    footer {
+      background-color: #343a40;
       color: white;
-      padding: 0.6rem 1.2rem;
-      border-radius: 6px;
-      font-weight: bold;
-      margin-top: 1rem;
-      text-decoration: none;
-      transition: background 0.3s;
+      text-align: center;
+      padding: 20px;
     }
 
-    .cta-btn:hover {
-      background-color: #155ab6;
+    .map-container {
+      margin-top: 20px;
+    }
+
+    /* WhatsApp Floating Button */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #25D366;
+      color: white;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      z-index: 999;
+    }
+
+    .whatsapp-float img {
+      width: 30px;
+      height: 30px;
     }
 
     iframe {
       border: none;
-      border-radius: 8px;
+      width: 100%;
     }
 
-    footer {
-      background-color: #1a237e;
-      color: white;
-      text-align: center;
-      padding: 1.5rem 1rem;
-      font-size: 0.95rem;
+    .form-section {
+      margin-top: 40px;
     }
   </style>
+
+  <meta name="keywords" content="Image Printers, Printing Press Hyderabad, Hospital Printing Ameerpet, Clinic Flyers, Medical Print Balkampet, SR Nagar Printers, Flex Printing Kukatpally, Pharma Brochures Hyderabad, Digital Offset Printing Hyderabad, Wedding Cards Printing Hyderabad" />
+  <meta name="description" content="Image Printers in Balkampet, Hyderabad offers multicolor offset and digital printing for hospitals, clinics, labs, and businesses. We serve Ameerpet, SR Nagar, and surrounding areas with fast, affordable, and high-quality printing." />
 </head>
+
 <body>
+
   <header>
-    <img src="logo.jpg" alt="Image Printers Logo" class="logo" />
+    <img src="logo10.jpeg" alt="Image Printers Logo" class="logo-top" />
     <h1>Image Printers</h1>
     <p>One Stop Solution for All Multicolor Printing & Designing</p>
   </header>
@@ -154,111 +133,105 @@
   <nav>
     <a href="#about">About Us</a>
     <a href="#services">Services</a>
-    <a href="#why-us">Why Us</a>
-    <a href="#contact-info">Contact</a>
-    <a href="#contact-form">Form</a>
+    <a href="#why">Why Us</a>
+    <a href="#contact">Contact</a>
+    <a href="#form">Get a Quote</a>
   </nav>
 
-  <main>
-    <section id="about">
-      <h2>About Us</h2>
-      <p><strong>Image Printers</strong>, located in Balkampet, Hyderabad, offers high-quality printing solutions for hospitals, labs, clinics, and businesses. With advanced offset and digital printing, we deliver impactful designs and print media for SR Nagar, Ameerpet, Kukatpally, and surrounding areas.</p>
-    </section>
+  <section id="about">
+    <h2>About Us</h2>
+    <p>Image Printers, located in Balkampet, Hyderabad, offers high-quality printing solutions for hospitals, labs, clinics, and businesses. With advanced offset and digital printing, we deliver impactful designs and print media for SR Nagar, Ameerpet, Kukatpally, and surrounding areas.</p>
+  </section>
 
-    <section id="services">
-      <h2>What We Do</h2>
-      <ul>
-        <li>Hospital & Clinic Letterheads</li>
-        <li>Pharmaceutical Brochures & Flyers</li>
-        <li>Lab Reports, Prescription Pads, Medical Files</li>
-        <li>Diaries, Registers, Appointment Cards</li>
-        <li>Custom Invitations, Flex Banners, Wedding Cards</li>
-        <li>File Folders, Envelopes, Booklets, Business Cards</li>
-      </ul>
-      <a href="#contact-form" class="cta-btn">Get a Quote</a>
-    </section>
+  <section id="services">
+    <h2>What We Do</h2>
+    <ul>
+      <li>Hospital & Clinic Letterheads</li>
+      <li>Pharmaceutical Brochures & Flyers</li>
+      <li>Lab Reports, Prescription Pads, Medical Files</li>
+      <li>Diaries, Registers, Appointment Cards</li>
+      <li>Custom Invitations, Flex Banners, Wedding Cards</li>
+      <li>File Folders, Envelopes, Booklets, Business Cards</li>
+    </ul>
+  </section>
 
-    <section id="why-us">
-      <h2>Why Choose Us</h2>
-      <ul>
-        <li><strong>Trusted by Doctors & Pharma Clients</strong></li>
-        <li><strong>Fast Delivery & Affordable Pricing</strong></li>
-        <li><strong>10+ Years in Healthcare Printing</strong></li>
-        <li><strong>Offset & Digital Printing Experts</strong></li>
-        <li><strong>Customer-First Approach</strong></li>
-      </ul>
-    </section>
+  <section id="why">
+    <h2>Why Choose Us</h2>
+    <ul>
+      <li>Trusted by Doctors & Pharma Clients</li>
+      <li>Fast Delivery & Affordable Pricing</li>
+      <li>10+ Years in Healthcare Printing</li>
+      <li>Offset & Digital Printing Experts</li>
+      <li>Customer-First Approach</li>
+    </ul>
+  </section>
+  <header>
+    <h1>Our Trusted Clients</h1>
+    <p>Vertical Scrolling Logo Carousel</p>
+  </header>
 
-    <section id="contact-info">
-      <h2>Contact Information</h2>
-      <p>
-        <strong>Image Printers</strong><br />
-        Kiran Kumar<br />
-        7-1-276/1/B/11, Near Yellamma Temple,<br />
-        Suprabath Nagar Colony, Balkampet, Hyderabad, Telangana 500038<br />
-        <strong>Phone:</strong> <a href="tel:+919989263369">+91 9989 263 369</a><br />
-        <strong>Email:</strong> <a href="mailto:imageprinters.hyd@gmail.com">imageprinters.hyd@gmail.com</a>
-      </p>
+  <div class="carousel-container">
+    <div class="carousel-track">
+      <!-- Uploaded logos -->
+      <img src="logo4.jpeg" alt="Logo 4">
+      <img src="logo5.jpeg" alt="Logo 5">
+      <img src="logo6.jpeg" alt="Logo 6">
 
-      <h3>Find Us on Map</h3>
-      <iframe 
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.5822537000513!2d78.44657887502198!3d17.429414103858888!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb9a5f07c093b5%3A0x2ef6d4c22bce2e1d!2s7-1-276%2F1%2FB%2F11%2C%20Near%20Yellamma%20Temple%2C%20Suprabath%20Nagar%20Colony%2C%20Balkampet%2C%20Hyderabad!5e0!3m2!1sen!2sin!4v1721285729970"
-        width="100%" height="400" allowfullscreen="" loading="lazy">
+      <!-- Web logos -->
+      <img src="https://chat.openai.com/cdn-cgi/imagedelivery/N4zWz6Gz7C7lKCWum8z4YQ/9e5248d0-1c3a-44ff-78d7-d40e23295100/public" alt="Bharathi Cement">
+      <img src="https://chat.openai.com/cdn-cgi/imagedelivery/N4zWz6Gz7C7lKCWum8z4YQ/f1ee51b1-e33e-4c91-5cc3-9fc7b46b3500/public" alt="Alembic">
+      <img src="https://chat.openai.com/cdn-cgi/imagedelivery/N4zWz6Gz7C7lKCWum8z4YQ/818cf6a3-50b3-471b-4a31-40561edddf00/public" alt="Alphamed">
+      <img src="https://chat.openai.com/cdn-cgi/imagedelivery/N4zWz6Gz7C7lKCWum8z4YQ/ff4d7d88-0846-445c-1fa2-35b35b7ee300/public" alt="Chemo">
+      <img src="https://chat.openai.com/cdn-cgi/imagedelivery/N4zWz6Gz7C7lKCWum8z4YQ/134c1c88-efc3-41b3-6b63-dab6b103cf00/public" alt="Finoso">
+      <img src="https://chat.openai.com/cdn-cgi/imagedelivery/N4zWz6Gz7C7lKCWum8z4YQ/b8b41c7f-81c6-4e7a-42b6-f67f27d2a200/public" alt="Ferring">
+      <img src="https://chat.openai.com/cdn-cgi/imagedelivery/N4zWz6Gz7C7lKCWum8z4YQ/6795bb14-1684-4a6d-86a4-624cb0125a00/public" alt="GreenPark">
+      <img src="https://chat.openai.com/cdn-cgi/imagedelivery/N4zWz6Gz7C7lKCWum8z4YQ/967dd95e-3a98-48b0-8c42-2ae7db6d5300/public" alt="Calvary Temple">
+      <img src="https://chat.openai.com/cdn-cgi/imagedelivery/N4zWz6Gz7C7lKCWum8z4YQ/f7f4bd80-7b63-44a6-b8a2-76d72025ac00/public" alt="MicroCare ENT">
+      <img src="https://chat.openai.com/cdn-cgi/imagedelivery/N4zWz6Gz7C7lKCWum8z4YQ/3ee13128-55b5-4e86-2092-2600387a8000/public" alt="Landmark Hospital">
+
+      <!-- Duplicate for smooth loop -->
+      <img src="logo4.jpeg" alt="Logo 4 Duplicate">
+      <img src="logo5.jpeg" alt="Logo 5 Duplicate">
+      <img src="logo6.jpeg" alt="Logo 6 Duplicate">
+    </div>
+  </div>
+  <section id="contact">
+    <h2>Contact Information</h2>
+    <p>
+      <strong>Image Printers</strong><br />
+      Kiran Kumar<br />
+      7-1-276/1/B/11, Near Yellamma Temple,<br />
+      Suprabath Nagar Colony, Balkampet,<br />
+      Hyderabad, Telangana 500038<br />
+      <strong>Phone:</strong> +91 9989 263 369<br />
+      <strong>Email:</strong> <a href="mailto:imageprinters.hyd@gmail.com">imageprinters.hyd@gmail.com</a>
+    </p>
+
+    <div class="map-container">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.191915732149!2d78.448953314352!3d17.44211010646151!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb9a2ea49e9b71%3A0xc4733eaeeef55b96!2sBalkampet%2C%20Hyderabad%2C%20Telangana!5e0!3m2!1sen!2sin!4v1659476920033"
+        height="300"
+        allowfullscreen=""
+        loading="lazy">
       </iframe>
-    </section>
+    </div>
+  </section>
 
-    <!-- WhatsApp Chat Button -->
-<a href="https://wa.me/919989263369" 
-   class="whatsapp-float" 
-   target="_blank" 
-   aria-label="Chat on WhatsApp">
-  <img src="https://img.icons8.com/ios-filled/50/ffffff/whatsapp--v1.png" alt="WhatsApp Chat" />
-</a>
-
-<style>
-  .whatsapp-float {
-    position: fixed;
-    width: 60px;
-    height: 60px;
-    bottom: 20px;
-    right: 20px;
-    background-color: #25D366;
-    color: #FFF;
-    border-radius: 50px;
-    text-align: center;
-    box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.2s;
-  }
-
-  .whatsapp-float:hover {
-    transform: scale(1.1);
-  }
-
-  .whatsapp-float img {
-    width: 28px;
-    height: 28px;
-  }
-</style>
-
-
-    <section id="contact-form">
-      <h2>Send Us a Message</h2>
-      <p>Fill the Google Form below. We'll contact you soon.</p>
-      <iframe 
-        src="https://docs.google.com/forms/d/e/1FAIpQLScm2SjDM6X645MX_G8xRIK_8aDRbvDAPeW7LkwBE5m5lop0rw/viewform?embedded=true"
-        width="100%" height="800">
-        Loading…
-      </iframe>
-    </section>
-  </main>
+  <section id="form" class="form-section">
+    <h2>Get a Quote</h2>
+    <p>Fill out the form below and we’ll get back to you shortly.</p>
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScm2SjDM6X645MX_G8xRIK_8aDRbvDAPeW7LkwBE5m5lop0rw/viewform?embedded=true"
+      height="800">Loading…</iframe>
+  </section>
 
   <footer>
     <p>&copy; 2025 Image Printers. All rights reserved.</p>
-    <p><small>Printing Services in SR Nagar, Ameerpet, Balkampet, Kukatpally, Punjagutta, Banjara Hills, Mehdipatnam, Yousufguda</small></p>
   </footer>
+
+  <!-- WhatsApp Floating Button -->
+  <a class="whatsapp-float" href="https://wa.me/919989263369" target="_blank" title="Chat with us on WhatsApp">
+    <img src="https://img.icons8.com/ios-filled/50/ffffff/whatsapp.png" alt="WhatsApp">
+  </a>
+
 </body>
 </html>
