@@ -1,0 +1,90 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vertical Logo Carousel</title>
+  <style>
+    body {
+      background-color: #f9f9f9;
+      font-family: Arial, sans-serif;
+      padding: 30px;
+      text-align: center;
+    }
+
+    h2 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .carousel-container {
+      height: 400px;
+      width: 250px;
+      margin: 0 auto;
+      overflow: hidden;
+      border: 2px solid #ddd;
+      border-radius: 10px;
+      background: #fff;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .carousel-track {
+      display: flex;
+      flex-direction: column;
+      animation: scrollUp 20s linear infinite;
+    }
+
+    .carousel-container:hover .carousel-track {
+      animation-play-state: paused;
+    }
+
+    .carousel-track img {
+      height: 80px;
+      width: auto;
+      margin: 20px auto;
+      transition: transform 0.3s ease;
+    }
+
+    .carousel-track img:hover {
+      transform: scale(1.1);
+    }
+
+    @keyframes scrollUp {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-50%); }
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Our Clients</h2>
+  <div class="carousel-container">
+    <div class="carousel-track">
+      <img src="logo4.jpeg" alt="Client Logo 1">
+      <img src="logo5.jpeg" alt="Client Logo 2">
+      <img src="logo6.jpeg" alt="Client Logo 3">
+      <img src="logo7.jpeg" alt="Client Logo 4">
+      <img src="logo8.jpeg" alt="Client Logo 5">
+      <img src="logo9.jpeg" alt="Client Logo 6">
+      <img src="logo10.jpeg" alt="Client Logo 7">
+      <img src="logo11.jpeg" alt="Client Logo 8">
+      <img src="logo12.jpeg" alt="Client Logo 9">
+      <img src="logo13.jpeg" alt="Client Logo 10">
+
+      <!-- Duplicated for infinite scroll effect -->
+      <img src="logo4.jpeg" alt="Client Logo 1">
+      <img src="logo5.jpeg" alt="Client Logo 2">
+      <img src="logo6.jpeg" alt="Client Logo 3">
+      <img src="logo7.jpeg" alt="Client Logo 4">
+      <img src="logo8.jpeg" alt="Client Logo 5">
+      <img src="logo9.jpeg" alt="Client Logo 6">
+      <img src="logo10.jpeg" alt="Client Logo 7">
+      <img src="logo11.jpeg" alt="Client Logo 8">
+      <img src="logo12.jpeg" alt="Client Logo 9">
+      <img src="logo13.jpeg" alt="Client Logo 10">
+    </div>
+  </div>
+
+</body>
+</html>
