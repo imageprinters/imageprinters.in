@@ -2,10 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Image Printers | Professional Printing Press in Hyderabad</title>
-  <meta name="description" content="Image Printers in Balkampet, Hyderabad – Expert in offset & digital printing for hospitals, clinics, labs & businesses across Hyderabad."/>
-  <meta name="keywords" content="printing press hyderabad, offset printing balkampet, digital printing sr nagar, pharma brochures, clinic letterheads, flex banners hyderabad"/>
+ <header id="home">
+  <img src="logo.jpg" alt="Image Printers Logo"/>
+  <h1>Image Printers</h1>
+  <p class="tagline">One‑Stop Solution for Multicolor Printing & Designing</p>
+</header>
+ 
+
+  
 
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet"/>
   <style>
@@ -36,6 +40,35 @@
     .whatsapp { background:#25D366; bottom:20px; right:20px; }
     .call { background:#1a237e; bottom:90px; right:20px; }
     .whatsapp img, .call img { width:30px; }
+
+    /* Auto-scrolling logos */
+    .carousel-container {
+      overflow: hidden;
+      position: relative;
+      width: 100%;
+      height: 80px;
+      margin-top: 20px;
+    }
+
+    .carousel-track {
+      display: flex;
+      width: max-content;
+      animation: scroll 30s linear infinite;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .carousel-track img {
+      height: 60px;
+      width: auto;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+
+    @keyframes scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
   </style>
 </head>
 <body>
@@ -93,6 +126,7 @@
       <img src="logo9.jpeg" alt="Client Logo">
       <img src="logo10.jpeg" alt="Client Logo">
       <img src="logo11.jpeg" alt="Client Logo">
+      <!-- Duplicate for smooth infinite scroll -->
       <img src="logo7.jpeg" alt="Client Logo">
       <img src="logo8.jpeg" alt="Client Logo">
       <img src="logo9.jpeg" alt="Client Logo">
@@ -108,7 +142,7 @@
   <div class="contact-map">
     <iframe src="https://maps.app.goo.gl/X15Cxgvike2rpE3a9" width="100%" height="300" allowfullscreen="" loading="lazy"></iframe>
   </div>
-  
+</section>
 
 <!-- Floating Buttons -->
 <a href="https://wa.me/919989263369" target="_blank" class="whatsapp">
