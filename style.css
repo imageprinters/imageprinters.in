@@ -1,63 +1,76 @@
-.client-marquee {
-    padding: 60px 0;
-    overflow: hidden; /* Critical: Hides logos outside the screen width */
-    background: rgba(255, 255, 255, 0.05); /* Subtle contrast */
+:root {
+    --brand-yellow: #FFD700;
+    --brand-orange: #FF8C00;
+    --dark: #121212;
 }
 
-.marquee-wrapper {
+* { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, var(--brand-yellow), var(--brand-orange));
+    background-attachment: fixed;
+    color: var(--dark);
+}
+
+/* Navbar */
+.navbar {
     display: flex;
-    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 8%;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
-.marquee-content {
-    display: flex;
-    /* 40 seconds provides a professional, readable speed */
-    animation: scrollHorizontal 40s linear infinite;
-}
+.main-logo { height: 50px; mix-blend-mode: multiply; }
 
-.logo-item {
-    flex-shrink: 0;
-    width: 250px; /* Adjust this to change spacing between logos */
-    padding: 0 40px;
+/* Hero Section with Background Image */
+.hero {
+    height: 90vh;
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('hero_bg.jpg');
+    background-size: cover;
+    background-position: center;
     display: flex;
     align-items: center;
-    justify-content: center;
+    color: white;
+    padding: 0 10%;
 }
 
-.logo-item img {
-    max-width: 100%;
-    height: auto;
-    max-height: 70px; /* Keeps all logos a uniform height */
-    mix-blend-mode: multiply; /* Blends white backgrounds into your orange theme */
-    filter: grayscale(100%); /* Optional: makes them look premium/uniform */
-    opacity: 0.8;
-    transition: 0.3s ease;
+.hero h1 { font-size: 4rem; font-weight: 900; }
+.hero h2 span { color: var(--brand-orange); }
+
+/* Infinite Scroll Logics */
+.client-marquee { padding: 80px 0; overflow: hidden; }
+.marquee-wrapper { display: flex; width: 100%; }
+.marquee-content {
+    display: flex;
+    animation: scroll 40s linear infinite;
 }
 
-.logo-item img:hover {
-    filter: grayscale(0%);
-    opacity: 1;
-    transform: scale(1.1); /* Subtle pop effect on hover */
+.logo-item { width: 220px; padding: 0 30px; flex-shrink: 0; }
+.logo-item img { max-width: 100%; mix-blend-mode: multiply; filter: grayscale(100%); transition: 0.3s; }
+.logo-item img:hover { filter: grayscale(0%); transform: scale(1.1); }
+
+@keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
 }
 
-/* The Horizontal Scroll Logic */
-@keyframes scrollHorizontal {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        /* We move exactly half the width of the content (the first set) */
-        transform: translateX(-50%);
-    }
+/* Service Grid */
+.service-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 40px 10%;
 }
 
-/* Mobile Compatibility */
-@media (max-width: 768px) {
-    .logo-item {
-        width: 180px;
-        padding: 0 20px;
-    }
-    .marquee-content {
-        animation: scrollHorizontal 25s linear infinite; /* Slightly faster for mobile */
-    }
+.service-card {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
 }
