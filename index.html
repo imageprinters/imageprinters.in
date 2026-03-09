@@ -63,11 +63,14 @@
   /* ABOUT */
   .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; margin-top:56px; }
   .about-visual-main { width:100%; aspect-ratio:4/3; border-radius:8px; background:var(--ink); display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; }
-  .print-anim { position:absolute; inset:0; display:flex; flex-direction:column; gap:12px; align-items:center; justify-content:center; padding:20px; }
+
+  /* FIX 1: z-index so logo shows IN FRONT of animation lines */
+  .print-anim { position:absolute; inset:0; z-index:1; display:flex; flex-direction:column; gap:12px; align-items:center; justify-content:center; padding:20px; }
   .print-line { height:3px; border-radius:2px; background:linear-gradient(90deg,var(--gold),transparent); animation:printLine 2.5s ease-in-out infinite; }
   @keyframes printLine { 0%{width:0;opacity:0} 50%{width:80%;opacity:1} 100%{width:0;opacity:0} }
-  .about-logo-overlay { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; }
+  .about-logo-overlay { position:absolute; inset:0; z-index:2; display:flex; align-items:center; justify-content:center; }
   .about-logo-overlay img { max-width:55%; max-height:55%; object-fit:contain; border-radius:8px; }
+
   .about-badge { position:absolute; bottom:-18px; right:-18px; background:var(--gold); color:#fff; padding:18px 22px; border-radius:8px; text-align:center; box-shadow:0 8px 28px rgba(201,168,76,0.4); }
   .about-badge .bn { font-family:'Playfair Display',serif; font-size:2.4rem; font-weight:900; display:block; }
   .about-badge .bt { font-size:0.72rem; font-weight:600; letter-spacing:0.06em; }
@@ -83,13 +86,31 @@
   .process-bg .sec-title { color:var(--paper); }
   .process-bg .sec-sub { color:rgba(250,248,243,0.55); }
   .process-steps { display:grid; grid-template-columns:repeat(4,1fr); gap:2px; margin-top:52px; }
-  .proc-step { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.07); padding:32px 22px; position:relative; transition:background 0.3s; }
+
+  /* FIX 2: Process step animations */
+  .proc-step { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.07); padding:32px 22px; position:relative; opacity:0; transform:translateY(40px); transition:background 0.3s, opacity 0.6s ease, transform 0.6s ease; }
+  .proc-step.visible { opacity:1; transform:translateY(0); }
+  .proc-step:nth-child(1) { transition-delay:0.1s; }
+  .proc-step:nth-child(2) { transition-delay:0.3s; }
+  .proc-step:nth-child(3) { transition-delay:0.5s; }
+  .proc-step:nth-child(4) { transition-delay:0.7s; }
   .proc-step:hover { background:rgba(201,168,76,0.08); }
-  .proc-num { font-family:'Playfair Display',serif; font-size:3.8rem; font-weight:900; color:rgba(201,168,76,0.18); line-height:1; margin-bottom:14px; }
-  .proc-icon { font-size:1.7rem; margin-bottom:10px; }
+
+  .proc-num { font-family:'Playfair Display',serif; font-size:3.8rem; font-weight:900; color:rgba(201,168,76,0.18); line-height:1; margin-bottom:14px; transition:color 0.3s ease, text-shadow 0.3s ease; }
+  .proc-step:hover .proc-num { color:var(--gold-light); text-shadow:0 0 20px rgba(201,168,76,0.4); }
+
+  .proc-icon { font-size:1.7rem; margin-bottom:10px; display:inline-block; transition:transform 0.3s ease; }
+  .proc-step:hover .proc-icon { transform:scale(1.3) rotate(-5deg); }
+
   .proc-step h3 { color:var(--paper); font-size:1rem; font-weight:600; margin-bottom:8px; }
   .proc-step p { color:rgba(250,248,243,0.5); font-size:0.83rem; line-height:1.6; }
-  .proc-arrow { position:absolute; right:-14px; top:50%; transform:translateY(-50%); color:var(--gold); font-size:1.3rem; z-index:2; }
+
+  .proc-arrow { position:absolute; right:-14px; top:50%; color:var(--gold); font-size:1.3rem; z-index:2; display:inline-block; animation:arrowPulse 1.2s ease-in-out infinite; }
+  @keyframes arrowPulse {
+    0%   { transform:translateY(-50%) translateX(0);   opacity:1; }
+    50%  { transform:translateY(-50%) translateX(6px); opacity:0.4; }
+    100% { transform:translateY(-50%) translateX(0);   opacity:1; }
+  }
 
   /* SERVICES */
   .svc-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:52px; }
@@ -132,6 +153,35 @@
   .contact-row { display:flex; justify-content:center; gap:36px; margin-top:24px; flex-wrap:wrap; }
   .contact-item { display:flex; align-items:center; gap:7px; color:rgba(255,255,255,0.88); font-size:0.88rem; text-decoration:none; }
   .contact-item:hover { color:#fff; }
+
+  /* FIX 3: CLIENTS SECTION */
+  .clients-sec { padding:70px 0; overflow:hidden; }
+  .clients-sec .sec-label,
+  .clients-sec .sec-title { padding:0 5vw; }
+  .scroll-wrap { overflow:hidden; margin-top:40px; position:relative; }
+  .scroll-wrap::before,
+  .scroll-wrap::after { content:''; position:absolute; top:0; bottom:0; width:100px; z-index:2; pointer-events:none; }
+  .scroll-wrap::before { left:0; background:linear-gradient(to right, var(--paper), transparent); }
+  .scroll-wrap::after { right:0; background:linear-gradient(to left, var(--paper), transparent); }
+  .scroll-track { display:flex; align-items:center; width:max-content; animation:scrollLeft 35s linear infinite; }
+  .scroll-track:hover { animation-play-state:paused; }
+  @keyframes scrollLeft { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+  .logo-card { width:130px; height:80px; flex-shrink:0; margin-right:28px; background:#fff; border:1px solid var(--border); border-radius:8px; display:flex; align-items:center; justify-content:center; padding:10px; transition:box-shadow 0.2s; background-size:contain; background-repeat:no-repeat; background-position:center; }
+  .logo-card:hover { box-shadow:0 4px 18px rgba(0,0,0,0.1); }
+  .logo-card[data-logo="1"]  { background-image:url('./images/logos/logo1.jpeg'); }
+  .logo-card[data-logo="2"]  { background-image:url('./images/logos/logo2.jpeg'); }
+  .logo-card[data-logo="3"]  { background-image:url('./images/logos/logo3.jpeg'); }
+  .logo-card[data-logo="4"]  { background-image:url('./images/logos/logo4.jpeg'); }
+  .logo-card[data-logo="5"]  { background-image:url('./images/logos/logo5.jpeg'); }
+  .logo-card[data-logo="6"]  { background-image:url('./images/logos/logo6.jpeg'); }
+  .logo-card[data-logo="7"]  { background-image:url('./images/logos/logo7.jpeg'); }
+  .logo-card[data-logo="8"]  { background-image:url('./images/logos/logo8.jpeg'); }
+  .logo-card[data-logo="9"]  { background-image:url('./images/logos/logo9.jpeg'); }
+  .logo-card[data-logo="10"] { background-image:url('./images/logos/logo10.jpeg'); }
+  .logo-card[data-logo="11"] { background-image:url('./images/logos/logo11.jpeg'); }
+  .logo-card[data-logo="12"] { background-image:url('./images/logos/logo12.jpeg'); }
+  /* Placeholder style when logo image not yet uploaded */
+  .logo-card-placeholder { font-size:0.72rem; color:var(--muted); font-weight:500; text-align:center; }
 
   /* LOCATION */
   .loc-sec { background:var(--ink); }
@@ -188,7 +238,7 @@
     .footer-top{flex-direction:column}
   }
 </style>
-</head> 
+</head>
 <body>
 
 <a class="wa-float" href="https://wa.me/919989263369" target="_blank" aria-label="WhatsApp">
@@ -197,8 +247,8 @@
 
 <nav>
   <a href="#" class="nav-logo">
-  <img src="logo.jpg" alt="Image Printers Logo">  
-  <span class="nav-logo-text">Image Printers<small>Balkampet, Hyderabad</small></span>
+    <img src="logo.jpg" alt="Image Printers Logo">
+    <span class="nav-logo-text">Image Printers<small>Balkampet, Hyderabad</small></span>
   </a>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
@@ -213,6 +263,7 @@
     <span></span><span></span><span></span>
   </button>
 </nav>
+
 <div class="mobile-menu" id="mobileMenu">
   <a href="#about" onclick="closeMenu()">About</a>
   <a href="#services" onclick="closeMenu()">Services</a>
@@ -249,7 +300,6 @@
   <div class="about-grid">
     <div class="about-visual">
       <div class="about-visual-main">
-
         <div class="print-anim">
           <div class="print-line" style="animation-delay:0.0s;width:60%"></div>
           <div class="print-line" style="animation-delay:0.3s;width:65%"></div>
@@ -260,12 +310,9 @@
           <div class="print-line" style="animation-delay:1.8s;width:90%"></div>
           <div class="print-line" style="animation-delay:2.1s;width:95%"></div>
         </div>
-
-        <!-- LOGO IN CENTER, IN FRONT OF LINES -->
         <div class="about-logo-overlay">
           <img src="logo.jpg" alt="Image Printers Logo">
         </div>
-
         <div class="about-badge"><span class="bn">10+</span><span class="bt">YEARS IN BUSINESS</span></div>
       </div>
     </div>
@@ -323,6 +370,42 @@
   </div>
 </section>
 
+<!-- FIX 3: CLIENTS SECTION (was linked in nav but missing) -->
+<section id="clients" class="clients-sec">
+  <div class="sec-label">Our Clients</div>
+  <div class="sec-title">Trusted by Businesses Across Hyderabad</div>
+  <div class="scroll-wrap">
+    <div class="scroll-track">
+      <!-- First set -->
+      <div class="logo-card" data-logo="1"><span class="logo-card-placeholder">Client 1</span></div>
+      <div class="logo-card" data-logo="2"><span class="logo-card-placeholder">Client 2</span></div>
+      <div class="logo-card" data-logo="3"><span class="logo-card-placeholder">Client 3</span></div>
+      <div class="logo-card" data-logo="4"><span class="logo-card-placeholder">Client 4</span></div>
+      <div class="logo-card" data-logo="5"><span class="logo-card-placeholder">Client 5</span></div>
+      <div class="logo-card" data-logo="6"><span class="logo-card-placeholder">Client 6</span></div>
+      <div class="logo-card" data-logo="7"><span class="logo-card-placeholder">Client 7</span></div>
+      <div class="logo-card" data-logo="8"><span class="logo-card-placeholder">Client 8</span></div>
+      <div class="logo-card" data-logo="9"><span class="logo-card-placeholder">Client 9</span></div>
+      <div class="logo-card" data-logo="10"><span class="logo-card-placeholder">Client 10</span></div>
+      <div class="logo-card" data-logo="11"><span class="logo-card-placeholder">Client 11</span></div>
+      <div class="logo-card" data-logo="12"><span class="logo-card-placeholder">Client 12</span></div>
+      <!-- Duplicate set for seamless loop -->
+      <div class="logo-card" data-logo="1"><span class="logo-card-placeholder">Client 1</span></div>
+      <div class="logo-card" data-logo="2"><span class="logo-card-placeholder">Client 2</span></div>
+      <div class="logo-card" data-logo="3"><span class="logo-card-placeholder">Client 3</span></div>
+      <div class="logo-card" data-logo="4"><span class="logo-card-placeholder">Client 4</span></div>
+      <div class="logo-card" data-logo="5"><span class="logo-card-placeholder">Client 5</span></div>
+      <div class="logo-card" data-logo="6"><span class="logo-card-placeholder">Client 6</span></div>
+      <div class="logo-card" data-logo="7"><span class="logo-card-placeholder">Client 7</span></div>
+      <div class="logo-card" data-logo="8"><span class="logo-card-placeholder">Client 8</span></div>
+      <div class="logo-card" data-logo="9"><span class="logo-card-placeholder">Client 9</span></div>
+      <div class="logo-card" data-logo="10"><span class="logo-card-placeholder">Client 10</span></div>
+      <div class="logo-card" data-logo="11"><span class="logo-card-placeholder">Client 11</span></div>
+      <div class="logo-card" data-logo="12"><span class="logo-card-placeholder">Client 12</span></div>
+    </div>
+  </div>
+</section>
+
 <div class="quote-sec" id="quote">
   <h2>Ready to Print? Let's Talk!</h2>
   <p>Send us your requirements on WhatsApp and get a quick quote within minutes.</p>
@@ -356,7 +439,10 @@
 <footer>
   <div class="footer-top">
     <div class="footer-brand">
-      <div class="f-logo"><img src="data:image/jpeg;base64,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" alt="Image Printers"><span>Image Printers</span></div>
+      <div class="f-logo">
+        <img src="logo.jpg" alt="Image Printers">
+        <span>Image Printers</span>
+      </div>
       <p>10+ years of printing excellence in Balkampet, Hyderabad. Your trusted partner for all print needs — from business cards to pharma log books.</p>
     </div>
     <div class="f-links"><h4>Services</h4><ul><li><a href="#services">ID Cards &amp; Tags</a></li><li><a href="#services">Flyers &amp; Brochures</a></li><li><a href="#services">Visiting Cards</a></li><li><a href="#services">Letter Heads</a></li><li><a href="#services">Diaries</a></li><li><a href="#services">Pharma Log Books</a></li><li><a href="#services">Hospital Stationery</a></li></ul></div>
@@ -372,18 +458,55 @@
 <script>
 function toggleMenu(){ document.getElementById('mobileMenu').classList.toggle('open'); }
 function closeMenu(){ document.getElementById('mobileMenu').classList.remove('open'); }
+
+/* Close menu on outside click */
+document.addEventListener('click', function(e){
+  const nav = document.querySelector('nav');
+  const menu = document.getElementById('mobileMenu');
+  if(!nav.contains(e.target) && !menu.contains(e.target)) closeMenu();
+});
+
+/* Smooth scroll */
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', function(e) {
     const t = document.querySelector(this.getAttribute('href'));
     if(t){ e.preventDefault(); window.scrollTo({top:t.offsetTop-80,behavior:'smooth'}); }
   });
 });
+
+/* Scroll-in animation for cards and process steps */
 const obs = new IntersectionObserver(entries => {
   entries.forEach(e => { if(e.isIntersecting){ e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; } });
 }, {threshold:0.1});
-document.querySelectorAll('.svc-card,.abt-pt,.proc-step,.gal-item').forEach(el => {
+
+document.querySelectorAll('.svc-card,.abt-pt,.gal-item').forEach(el => {
   el.style.opacity='0'; el.style.transform='translateY(28px)'; el.style.transition='opacity 0.55s ease,transform 0.55s ease'; obs.observe(el);
 });
+
+/* Process steps: use separate observer to respect CSS transition-delay per child */
+const procObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); procObs.unobserve(e.target); } });
+}, {threshold:0.2});
+
+document.querySelectorAll('.proc-step').forEach(el => procObs.observe(el));
+
+/* Active nav highlight on scroll */
+window.addEventListener('scroll', function(){
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  let current = '';
+  sections.forEach(s => { if(scrollY >= s.offsetTop - 200) current = s.getAttribute('id'); });
+  navLinks.forEach(l => {
+    l.style.color = l.getAttribute('href') === '#'+current ? 'var(--gold)' : 'var(--ink)';
+  });
+});
+
+/* Responsive scroll speed */
+window.addEventListener('resize', function(){
+  const t = document.querySelector('.scroll-track');
+  if(t) t.style.animationDuration = window.innerWidth < 768 ? '25s' : '35s';
+});
+window.dispatchEvent(new Event('resize'));
 </script>
 </body>
 </html>
