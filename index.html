@@ -18,6 +18,71 @@
   html { scroll-behavior:smooth; }
   body { font-family:'DM Sans',sans-serif; background:var(--paper); color:var(--ink); overflow-x:hidden; }
 
+  /* ===== PRELOADER ===== */
+  #preloader {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.6s ease, visibility 0.6s ease;
+  }
+  #preloader.hidden { opacity:0; visibility:hidden; }
+
+  .pre-logo-container {
+    position: relative;
+    width: 130px;
+    height: 170px;
+  }
+
+  /* All layers share the same logo image, each clipped to one region */
+  .pre-layer {
+    position: absolute;
+    inset: 0;
+    background: url('logo.jpg') center / contain no-repeat;
+    opacity: 0;
+  }
+
+  /* Step 1 — orange dot at top */
+  .pre-layer-dot {
+    clip-path: inset(0% 32% 76% 32%);
+    animation: layerPop 0.4s cubic-bezier(0.34,1.56,0.64,1) forwards;
+    animation-delay: 0.15s;
+  }
+
+  /* Step 2 — orange arc/swoosh body */
+  .pre-layer-arc {
+    clip-path: inset(5% 2% 38% 2%);
+    animation: layerSlide 0.55s ease forwards;
+    animation-delay: 0.65s;
+  }
+
+  /* Step 3 — "IMAGE" orange text */
+  .pre-layer-image {
+    clip-path: inset(62% 5% 20% 5%);
+    animation: layerSlide 0.4s ease forwards;
+    animation-delay: 1.3s;
+  }
+
+  /* Step 4 — "PRINTERS" dark text */
+  .pre-layer-printers {
+    clip-path: inset(80% 5% 2% 5%);
+    animation: layerSlide 0.4s ease forwards;
+    animation-delay: 1.75s;
+  }
+
+  @keyframes layerPop {
+    0%   { opacity:0; transform:scale(0.4); }
+    70%  { opacity:1; transform:scale(1.15); }
+    100% { opacity:1; transform:scale(1); }
+  }
+  @keyframes layerSlide {
+    0%   { opacity:0; transform:translateY(8px); }
+    100% { opacity:1; transform:translateY(0); }
+  }
+
   /* NAV */
   nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-items:center; justify-content:space-between; padding:0 5vw; height:72px; background:rgba(250,248,243,0.95); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); }
   .nav-logo { display:flex; align-items:center; gap:12px; text-decoration:none; }
@@ -112,12 +177,167 @@
     100% { transform:translateY(-50%) translateX(0);   opacity:1; }
   }
 
-  /* SERVICES */
+  /* ===== SERVICE CARD MOCKUPS ===== */
+  .svc-img { width:100%; aspect-ratio:16/9; display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; }
+  .svc-overlay { position:absolute; inset:0; background:linear-gradient(135deg,rgba(201,168,76,0.15),transparent); z-index:1; }
+  .mockup-wrap { position:relative; z-index:2; display:flex; align-items:center; justify-content:center; width:100%; height:100%; }
+
+  /* ---- ID CARD MOCKUP ---- */
+  .id-card {
+    width:72px; height:100px; background:#fff; border-radius:6px;
+    box-shadow:0 6px 18px rgba(0,0,0,0.35);
+    display:flex; flex-direction:column; overflow:hidden;
+    transform:rotate(-5deg); margin-right:-12px;
+  }
+  .id-card-header { height:28px; background:linear-gradient(135deg,#e85d10,#c9a84c); display:flex; align-items:center; justify-content:center; }
+  .id-card-header span { width:22px; height:22px; border-radius:50%; background:rgba(255,255,255,0.3); display:block; }
+  .id-card-body { padding:6px 6px 4px; flex:1; display:flex; flex-direction:column; gap:4px; align-items:center; }
+  .id-card-photo { width:28px; height:28px; border-radius:50%; background:#ddd; border:2px solid #e85d10; }
+  .id-card-line { height:4px; border-radius:2px; background:#e0dbd0; width:80%; }
+  .id-card-line.short { width:55%; background:rgba(201,168,76,0.5); }
+  .id-card-barcode { display:flex; gap:2px; margin-top:2px; }
+  .id-card-barcode span { width:2px; height:10px; background:#333; border-radius:1px; }
+  .id-card-barcode span:nth-child(even) { height:7px; }
+
+  /* ID Tag beside card */
+  .id-tag {
+    width:52px; height:70px; background:#fff8f0; border-radius:4px;
+    box-shadow:0 4px 14px rgba(0,0,0,0.25);
+    display:flex; flex-direction:column; align-items:center;
+    padding:6px 4px; gap:4px;
+    transform:rotate(6deg) translateY(10px);
+    border-top:4px solid #e85d10;
+  }
+  .id-tag-hole { width:12px; height:12px; border-radius:50%; border:2px solid #e85d10; margin-top:-2px; }
+  .id-tag-string { width:1px; height:20px; background:#aaa; margin:-4px auto; }
+  .id-tag-line { height:3px; border-radius:2px; background:#e0dbd0; width:80%; }
+  .id-tag-line.accent { background:#e85d10; width:60%; }
+
+  /* ---- FLYER + BROCHURE MOCKUP ---- */
+  .flyer-stack { position:relative; display:flex; align-items:flex-end; gap:0; }
+  .flyer {
+    width:65px; height:90px; border-radius:4px;
+    box-shadow:0 6px 16px rgba(0,0,0,0.3);
+    display:flex; flex-direction:column; overflow:hidden;
+    padding:8px 6px; gap:5px;
+  }
+  .flyer-1 { background:linear-gradient(160deg,#1b4332,#2d6a4f); transform:rotate(-8deg) translateX(10px); }
+  .flyer-2 { background:linear-gradient(160deg,#1a1a2e,#16213e); transform:rotate(-3deg); }
+  .flyer-title { height:7px; background:rgba(255,255,255,0.8); border-radius:3px; width:80%; }
+  .flyer-line { height:4px; background:rgba(255,255,255,0.3); border-radius:2px; }
+  .flyer-line.w60 { width:60%; }
+  .flyer-line.w80 { width:80%; }
+  .flyer-line.w45 { width:45%; }
+  .flyer-img-box { height:28px; background:rgba(255,255,255,0.12); border-radius:3px; margin-bottom:2px; display:flex; align-items:center; justify-content:center; }
+  .flyer-img-box span { font-size:14px; }
+
+  /* Brochure (tri-fold) */
+  .brochure {
+    width:80px; height:90px;
+    display:flex; border-radius:4px; overflow:hidden;
+    box-shadow:0 6px 16px rgba(0,0,0,0.3);
+    transform:rotate(4deg) translateX(-8px);
+  }
+  .brochure-panel { flex:1; display:flex; flex-direction:column; padding:5px 3px; gap:3px; }
+  .brochure-panel:nth-child(1) { background:#3d0000; border-right:1px solid rgba(255,255,255,0.1); }
+  .brochure-panel:nth-child(2) { background:#5a0000; border-right:1px solid rgba(255,255,255,0.1); }
+  .brochure-panel:nth-child(3) { background:#8b0000; }
+  .bro-line { height:3px; border-radius:2px; background:rgba(255,255,255,0.4); margin-bottom:2px; }
+  .bro-accent { height:16px; background:rgba(201,168,76,0.4); border-radius:2px; margin-top:4px; }
+
+  /* ---- VISITING CARDS MOCKUP ---- */
+  .vcard-stack { position:relative; width:120px; height:80px; }
+  .vcard {
+    position:absolute; width:90px; height:55px; border-radius:5px;
+    padding:8px 10px; display:flex; flex-direction:column; gap:5px;
+    box-shadow:0 4px 14px rgba(0,0,0,0.3);
+  }
+  .vcard:nth-child(1) { background:linear-gradient(135deg,#1a1a1a,#2c2c2c); top:20px; left:20px; transform:rotate(6deg); }
+  .vcard:nth-child(2) { background:linear-gradient(135deg,#2c1a0e,#5a3515); top:10px; left:10px; transform:rotate(2deg); }
+  .vcard:nth-child(3) { background:linear-gradient(135deg,#0d0d0d,#1a1a1a); top:2px; left:2px; transform:rotate(-3deg); }
+  .vcard-logo { width:16px; height:16px; border-radius:50%; background:linear-gradient(135deg,#e85d10,#c9a84c); }
+  .vcard-name { height:5px; background:rgba(255,255,255,0.8); border-radius:2px; width:70%; }
+  .vcard-detail { height:3px; background:rgba(255,255,255,0.3); border-radius:2px; width:55%; }
+
+  /* ---- LETTERHEAD MOCKUP ---- */
+  .letterhead {
+    width:72px; height:96px; background:#fff; border-radius:3px;
+    box-shadow:0 6px 20px rgba(0,0,0,0.3);
+    padding:0; overflow:hidden;
+    transform:rotate(-3deg);
+  }
+  .lh-header { height:20px; background:linear-gradient(135deg,#0d0d0d,#333); display:flex; align-items:center; padding:0 6px; gap:4px; }
+  .lh-logo-dot { width:10px; height:10px; border-radius:50%; background:#e85d10; }
+  .lh-logo-text { flex:1; height:4px; background:rgba(255,255,255,0.7); border-radius:2px; }
+  .lh-body { padding:8px 6px; display:flex; flex-direction:column; gap:4px; }
+  .lh-line { height:3px; border-radius:2px; background:#e0dbd0; }
+  .lh-line.w90 { width:90%; }
+  .lh-line.w70 { width:70%; }
+  .lh-line.w80 { width:80%; }
+  .lh-line.w50 { width:50%; }
+  .lh-gold { height:2px; background:var(--gold); width:100%; margin:4px 0; }
+  .lh-footer { position:absolute; bottom:0; left:0; right:0; height:8px; background:#0d0d0d; }
+
+  /* Second sheet behind */
+  .letterhead-2 {
+    width:72px; height:96px; background:#f5f5f5; border-radius:3px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.2);
+    position:absolute; top:8px; left:10px;
+    transform:rotate(4deg);
+    z-index:-1;
+  }
+
+  /* ---- DIARY MOCKUP ---- */
+  .diary {
+    width:72px; height:90px; border-radius:4px 8px 8px 4px;
+    box-shadow:0 6px 20px rgba(0,0,0,0.35);
+    display:flex; overflow:hidden;
+    transform:rotate(-4deg);
+  }
+  .diary-spine { width:12px; background:linear-gradient(180deg,#7b2d00,#d4682b); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px; }
+  .diary-spine span { width:6px; height:1px; background:rgba(255,255,255,0.4); display:block; }
+  .diary-cover { flex:1; background:linear-gradient(135deg,#5a2000,#c05020); padding:8px 6px; display:flex; flex-direction:column; gap:5px; }
+  .diary-title { height:6px; background:rgba(255,255,255,0.8); border-radius:2px; width:80%; }
+  .diary-sub { height:3px; background:rgba(255,255,255,0.4); border-radius:2px; width:55%; }
+  .diary-year { margin-top:auto; height:14px; background:rgba(0,0,0,0.25); border-radius:3px; display:flex; align-items:center; justify-content:center; }
+  .diary-year span { font-size:8px; color:rgba(255,255,255,0.7); font-weight:700; letter-spacing:1px; }
+
+  /* ---- PHARMA LOG BOOK ---- */
+  .logbook {
+    width:80px; height:100px; background:#fff; border-radius:3px 6px 6px 3px;
+    box-shadow:0 6px 20px rgba(0,0,0,0.3); overflow:hidden;
+    display:flex; transform:rotate(3deg);
+  }
+  .logbook-spine { width:10px; background:linear-gradient(180deg,#1a0050,#4a0080); }
+  .logbook-pages { flex:1; display:flex; flex-direction:column; }
+  .logbook-header { height:18px; background:linear-gradient(135deg,#1a0050,#4a0080); display:flex; align-items:center; padding:0 5px; }
+  .logbook-header span { font-size:6px; color:#fff; font-weight:700; letter-spacing:1px; }
+  .logbook-body { flex:1; padding:4px 5px; display:flex; flex-direction:column; gap:3px; }
+  .log-row { display:flex; gap:3px; }
+  .log-cell { flex:1; height:5px; border-radius:1px; background:#f0eeff; border-bottom:1px solid #ddd; }
+  .log-cell.head { background:#4a0080; opacity:0.15; }
+
+  /* ---- HOSPITAL FILE MOCKUP ---- */
+  .hosp-file {
+    width:75px; height:96px; background:#e8f4ff; border-radius:3px 6px 6px 3px;
+    box-shadow:0 6px 20px rgba(0,0,0,0.3); overflow:hidden;
+    display:flex; flex-direction:column;
+    transform:rotate(-4deg);
+  }
+  .hosp-file-tab { height:16px; background:linear-gradient(135deg,#003049,#0077b6); width:60%; border-radius:0 0 6px 0; display:flex; align-items:center; padding:0 6px; }
+  .hosp-file-tab span { font-size:6px; color:#fff; font-weight:700; letter-spacing:0.5px; }
+  .hosp-file-body { flex:1; padding:6px; display:flex; flex-direction:column; gap:4px; }
+  .hosp-line { height:3px; border-radius:2px; background:#c5d9ea; }
+  .hosp-line.w90 { width:90%; }
+  .hosp-line.w70 { width:70%; }
+  .hosp-line.w60 { width:60%; }
+  .hosp-rx { height:20px; background:rgba(0,119,182,0.08); border-radius:3px; border:1px solid rgba(0,119,182,0.2); display:flex; align-items:center; padding:0 4px; margin:4px 0; }
+  .hosp-rx span { font-size:11px; font-weight:900; color:#0077b6; opacity:0.6; font-style:italic; }
+
+  /* SERVICES GRID */
   .svc-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:52px; }
   .svc-card { background:#fff; border:1px solid var(--border); border-radius:10px; overflow:hidden; transition:transform 0.3s,box-shadow 0.3s; }
   .svc-card:hover { transform:translateY(-6px); box-shadow:0 20px 40px rgba(0,0,0,0.1); }
-  .svc-img { width:100%; aspect-ratio:16/9; display:flex; align-items:center; justify-content:center; font-size:2.8rem; position:relative; }
-  .svc-overlay { position:absolute; inset:0; background:linear-gradient(135deg,rgba(201,168,76,0.2),transparent); }
   .svc-body { padding:20px; }
   .svc-body h3 { font-size:1rem; font-weight:700; margin-bottom:7px; }
   .svc-body p { font-size:0.82rem; color:var(--muted); line-height:1.6; }
@@ -241,6 +461,16 @@
 </head>
 <body>
 
+<!-- PRELOADER -->
+<div id="preloader">
+  <div class="pre-logo-container">
+    <div class="pre-layer pre-layer-dot"></div>
+    <div class="pre-layer pre-layer-arc"></div>
+    <div class="pre-layer pre-layer-image"></div>
+    <div class="pre-layer pre-layer-printers"></div>
+  </div>
+</div>
+
 <a class="wa-float" href="https://wa.me/919989263369" target="_blank" aria-label="WhatsApp">
   <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
@@ -344,13 +574,209 @@
   <div class="sec-title">Our Printing Services</div>
   <p class="sec-sub">From everyday business stationery to specialized medical documentation — we handle it all with quality and consistency.</p>
   <div class="svc-grid">
-    <div class="svc-card"><div class="svc-img g1"><div class="svc-overlay"></div>&#129434;</div><div class="svc-body"><h3>ID Cards &amp; ID Tags</h3><p>Professional PVC and paper ID cards for schools, companies, hospitals &amp; events. Includes lanyards and tags.</p><span class="svc-tag">Popular</span></div></div>
-    <div class="svc-card"><div class="svc-img g2"><div class="svc-overlay"></div>&#128240;</div><div class="svc-body"><h3>Flyers &amp; Brochures</h3><p>Eye-catching flyers, leaflets and brochures on premium paper with vibrant, long-lasting inks.</p><span class="svc-tag">High Demand</span></div></div>
-    <div class="svc-card"><div class="svc-img g3"><div class="svc-overlay"></div>&#128188;</div><div class="svc-body"><h3>Visiting Cards</h3><p>Matte, gloss, spot UV, foil and standard business cards that leave a lasting impression.</p><span class="svc-tag">Best Seller</span></div></div>
-    <div class="svc-card"><div class="svc-img g4"><div class="svc-overlay"></div>&#128209;</div><div class="svc-body"><h3>Letter Heads</h3><p>Branded letter heads on premium paper stock — the foundation of professional correspondence.</p><span class="svc-tag">Corporate</span></div></div>
-    <div class="svc-card"><div class="svc-img g7"><div class="svc-overlay"></div>&#128212;</div><div class="svc-body"><h3>Diaries &amp; Notebooks</h3><p>Custom branded diaries and notebooks — perfect for corporate gifting or internal office use.</p><span class="svc-tag">Corporate</span></div></div>
-    <div class="svc-card"><div class="svc-img g5"><div class="svc-overlay"></div>&#128138;</div><div class="svc-body"><h3>Pharma Log Books</h3><p>Compliant, ruled log books for pharma companies with customised formats and company branding.</p><span class="svc-tag">Specialised</span></div></div>
-    <div class="svc-card"><div class="svc-img g6"><div class="svc-overlay"></div>&#127973;</div><div class="svc-body"><h3>Hospital &amp; Prescription Files</h3><p>Patient files, case sheets, prescription pads, OPD registers, and all clinical documentation.</p><span class="svc-tag">Medical</span></div></div>
+
+    <!-- ID Cards & Tags -->
+    <div class="svc-card">
+      <div class="svc-img g1">
+        <div class="svc-overlay"></div>
+        <div class="mockup-wrap">
+          <div class="id-card">
+            <div class="id-card-header"><span></span></div>
+            <div class="id-card-body">
+              <div class="id-card-photo"></div>
+              <div class="id-card-line"></div>
+              <div class="id-card-line short"></div>
+              <div class="id-card-barcode">
+                <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+              </div>
+            </div>
+          </div>
+          <div class="id-tag">
+            <div class="id-tag-hole"></div>
+            <div class="id-tag-string"></div>
+            <div class="id-tag-line accent"></div>
+            <div class="id-tag-line"></div>
+            <div class="id-tag-line"></div>
+            <div class="id-tag-line accent"></div>
+          </div>
+        </div>
+      </div>
+      <div class="svc-body"><h3>ID Cards &amp; ID Tags</h3><p>Professional PVC and paper ID cards for schools, companies, hospitals &amp; events. Includes lanyards and tags.</p><span class="svc-tag">Popular</span></div>
+    </div>
+
+    <!-- Flyers & Brochures -->
+    <div class="svc-card">
+      <div class="svc-img g2">
+        <div class="svc-overlay"></div>
+        <div class="mockup-wrap">
+          <div class="flyer-stack">
+            <div class="flyer flyer-1">
+              <div class="flyer-img-box"><span>🌿</span></div>
+              <div class="flyer-title"></div>
+              <div class="flyer-line w80"></div>
+              <div class="flyer-line w60"></div>
+              <div class="flyer-line w45"></div>
+            </div>
+            <div class="flyer flyer-2">
+              <div class="flyer-img-box"><span>🏢</span></div>
+              <div class="flyer-title"></div>
+              <div class="flyer-line w80"></div>
+              <div class="flyer-line w60"></div>
+            </div>
+          </div>
+          <div class="brochure">
+            <div class="brochure-panel"><div class="bro-accent"></div><div class="bro-line"></div><div class="bro-line"></div></div>
+            <div class="brochure-panel"><div class="bro-line"></div><div class="bro-line"></div><div class="bro-line"></div></div>
+            <div class="brochure-panel"><div class="bro-line"></div><div class="bro-accent"></div><div class="bro-line"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="svc-body"><h3>Flyers &amp; Brochures</h3><p>Eye-catching flyers, leaflets and brochures on premium paper with vibrant, long-lasting inks.</p><span class="svc-tag">High Demand</span></div>
+    </div>
+
+    <!-- Visiting Cards -->
+    <div class="svc-card">
+      <div class="svc-img g3">
+        <div class="svc-overlay"></div>
+        <div class="mockup-wrap">
+          <div class="vcard-stack">
+            <div class="vcard">
+              <div class="vcard-logo"></div>
+              <div class="vcard-name"></div>
+              <div class="vcard-detail"></div>
+            </div>
+            <div class="vcard">
+              <div class="vcard-logo"></div>
+              <div class="vcard-name"></div>
+              <div class="vcard-detail"></div>
+            </div>
+            <div class="vcard">
+              <div class="vcard-logo"></div>
+              <div class="vcard-name"></div>
+              <div class="vcard-detail"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="svc-body"><h3>Visiting Cards</h3><p>Matte, gloss, spot UV, foil and standard business cards that leave a lasting impression.</p><span class="svc-tag">Best Seller</span></div>
+    </div>
+
+    <!-- Letter Heads -->
+    <div class="svc-card">
+      <div class="svc-img g4">
+        <div class="svc-overlay"></div>
+        <div class="mockup-wrap" style="gap:10px;">
+          <div style="position:relative;">
+            <div class="letterhead-2"></div>
+            <div class="letterhead" style="position:relative;z-index:1;">
+              <div class="lh-header">
+                <div class="lh-logo-dot"></div>
+                <div class="lh-logo-text"></div>
+              </div>
+              <div class="lh-body">
+                <div class="lh-gold"></div>
+                <div class="lh-line w90"></div>
+                <div class="lh-line w70"></div>
+                <div class="lh-line w80"></div>
+                <div class="lh-line w50"></div>
+                <div class="lh-line w80"></div>
+                <div class="lh-line w70"></div>
+                <div class="lh-line w90"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="svc-body"><h3>Letter Heads</h3><p>Branded letter heads on premium paper stock — the foundation of professional correspondence.</p><span class="svc-tag">Corporate</span></div>
+    </div>
+
+    <!-- Diaries & Notebooks -->
+    <div class="svc-card">
+      <div class="svc-img g7">
+        <div class="svc-overlay"></div>
+        <div class="mockup-wrap">
+          <div class="diary">
+            <div class="diary-spine">
+              <span></span><span></span><span></span><span></span>
+            </div>
+            <div class="diary-cover">
+              <div class="diary-title"></div>
+              <div class="diary-sub"></div>
+              <div class="diary-year"><span>2025</span></div>
+            </div>
+          </div>
+          <!-- Open pages -->
+          <div style="width:60px;height:84px;background:#fff;border-radius:0 5px 5px 0;box-shadow:4px 4px 12px rgba(0,0,0,0.2);padding:8px 6px;display:flex;flex-direction:column;gap:4px;transform:rotate(2deg);">
+            <div style="height:3px;background:#f0d090;border-radius:2px;width:90%;"></div>
+            <div style="height:3px;background:#eee;border-radius:2px;width:80%;"></div>
+            <div style="height:3px;background:#eee;border-radius:2px;width:85%;"></div>
+            <div style="height:3px;background:#f0d090;border-radius:2px;width:70%;"></div>
+            <div style="height:3px;background:#eee;border-radius:2px;width:90%;"></div>
+            <div style="height:3px;background:#eee;border-radius:2px;width:75%;"></div>
+          </div>
+        </div>
+      </div>
+      <div class="svc-body"><h3>Diaries &amp; Notebooks</h3><p>Custom branded diaries and notebooks — perfect for corporate gifting or internal office use.</p><span class="svc-tag">Corporate</span></div>
+    </div>
+
+    <!-- Pharma Log Books -->
+    <div class="svc-card">
+      <div class="svc-img g5">
+        <div class="svc-overlay"></div>
+        <div class="mockup-wrap">
+          <div class="logbook">
+            <div class="logbook-spine"></div>
+            <div class="logbook-pages">
+              <div class="logbook-header"><span>PHARMA LOG</span></div>
+              <div class="logbook-body">
+                <div class="log-row"><div class="log-cell head"></div><div class="log-cell head"></div><div class="log-cell head"></div></div>
+                <div class="log-row"><div class="log-cell"></div><div class="log-cell"></div><div class="log-cell"></div></div>
+                <div class="log-row"><div class="log-cell"></div><div class="log-cell"></div><div class="log-cell"></div></div>
+                <div class="log-row"><div class="log-cell"></div><div class="log-cell"></div><div class="log-cell"></div></div>
+                <div class="log-row"><div class="log-cell"></div><div class="log-cell"></div><div class="log-cell"></div></div>
+                <div class="log-row"><div class="log-cell"></div><div class="log-cell"></div><div class="log-cell"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="svc-body"><h3>Pharma Log Books</h3><p>Compliant, ruled log books for pharma companies with customised formats and company branding.</p><span class="svc-tag">Specialised</span></div>
+    </div>
+
+    <!-- Hospital & Prescription Files -->
+    <div class="svc-card">
+      <div class="svc-img g6">
+        <div class="svc-overlay"></div>
+        <div class="mockup-wrap" style="gap:10px;">
+          <div class="hosp-file">
+            <div class="hosp-file-tab"><span>PATIENT FILE</span></div>
+            <div class="hosp-file-body">
+              <div class="hosp-rx"><span>Rx</span></div>
+              <div class="hosp-line w90"></div>
+              <div class="hosp-line w70"></div>
+              <div class="hosp-line w60"></div>
+              <div class="hosp-line w90"></div>
+              <div class="hosp-line w70"></div>
+            </div>
+          </div>
+          <!-- Prescription pad -->
+          <div style="width:55px;height:80px;background:#fff;border-radius:3px;box-shadow:0 4px 14px rgba(0,0,0,0.25);overflow:hidden;transform:rotate(5deg);">
+            <div style="height:14px;background:linear-gradient(135deg,#003049,#0077b6);display:flex;align-items:center;padding:0 5px;">
+              <span style="font-size:6px;color:#fff;font-weight:700;">PRESCRIPTION</span>
+            </div>
+            <div style="padding:5px 5px;display:flex;flex-direction:column;gap:3px;">
+              <div style="font-size:10px;font-weight:900;color:#0077b6;opacity:0.5;font-style:italic;">Rx</div>
+              <div style="height:2px;background:#dde;border-radius:1px;width:90%;"></div>
+              <div style="height:2px;background:#dde;border-radius:1px;width:80%;"></div>
+              <div style="height:2px;background:#dde;border-radius:1px;width:70%;"></div>
+              <div style="height:2px;background:#dde;border-radius:1px;width:85%;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="svc-body"><h3>Hospital &amp; Prescription Files</h3><p>Patient files, case sheets, prescription pads, OPD registers, and all clinical documentation.</p><span class="svc-tag">Medical</span></div>
+    </div>
+
   </div>
 </section>
 
@@ -456,6 +882,15 @@
 </footer>
 
 <script>
+/* ===== PRELOADER ===== */
+window.addEventListener('load', function() {
+  setTimeout(function() {
+    const pre = document.getElementById('preloader');
+    pre.classList.add('hidden');
+    setTimeout(() => pre.remove(), 600);
+  }, 2800); // stays visible for 2.2s — enough to see full animation
+});
+
 function toggleMenu(){ document.getElementById('mobileMenu').classList.toggle('open'); }
 function closeMenu(){ document.getElementById('mobileMenu').classList.remove('open'); }
 
