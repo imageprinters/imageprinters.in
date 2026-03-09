@@ -1,53 +1,122 @@
-/* Navigation Container */
+/* Color Palette from your Logo */
+:root {
+    --brand-yellow: #FFD700;
+    --brand-orange: #FF8C00;
+    --dark-grey: #1a1a1a;
+    --glass-white: rgba(255, 255, 255, 0.2);
+}
+
+/* 1. Global Background - Yellowish Orange Gradient */
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, var(--brand-yellow), var(--brand-orange));
+    background-attachment: fixed; /* Keeps background still while scrolling */
+    color: var(--dark-grey);
+}
+
+/* 2. Navigation Container (Top Right Alignment) */
 .navbar {
     display: flex;
-    justify-content: space-between; /* Pushes logo to left, nav to right */
-    align-items: center;            /* Vertically centers both in the row */
+    justify-content: space-between; 
+    align-items: center;
     padding: 1rem 8%;
     position: sticky;
     top: 0;
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.15); /* Glass effect */
     backdrop-filter: blur(12px);
     z-index: 1000;
     border-bottom: 1px solid rgba(255,255,255,0.2);
 }
 
-/* Logo Box */
+/* Logo Alignment */
 .logo-box {
     display: flex;
-    align-items: center; /* Ensures the logo image is centered within its container */
+    align-items: center;
 }
 
-.main-logo { 
-    height: 50px; 
+.main-logo {
+    height: 50px;
     width: auto;
-    mix-blend-mode: multiply; 
-    display: block; /* Removes any default bottom spacing */
+    mix-blend-mode: multiply; /* Blends logo background into the orange */
 }
 
-/* Navigation Links */
-.nav-links { 
-    display: flex; 
-    list-style: none; 
-    gap: 2.5rem; 
-    align-items: center; /* Keeps text parallel to the center of the logo */
+/* Nav Links - Desktop View */
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2.5rem;
+    align-items: center;
     margin: 0;
     padding: 0;
 }
 
-.nav-links a { 
-    text-decoration: none; 
-    color: var(--dark-grey); 
-    font-weight: 700; 
-    font-size: 0.95rem;
-    line-height: 1; /* Prevents text from shifting vertically */
+.nav-links a {
+    text-decoration: none;
+    color: var(--dark-grey);
+    font-weight: 700;
+    transition: 0.3s;
 }
 
+.nav-links a:hover {
+    color: white;
+}
+
+/* 3. Mobile View Layout */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 1rem 5%;
+    }
+
+    /* Hamburger icon stays at top right */
+    .hamburger {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+        order: 2; 
+    }
+
+    .hamburger span {
+        width: 25px;
+        height: 3px;
+        background: var(--dark-grey);
+        border-radius: 2px;
+    }
+
+    /* Dropdown menu appearing from the right */
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        right: 0; 
+        width: 220px;
+        background: white; /* Contrast for mobile menu readability */
+        flex-direction: column;
+        padding: 25px;
+        gap: 1.5rem;
+        box-shadow: -5px 10px 20px rgba(0,0,0,0.1);
+        border-bottom-left-radius: 20px;
+    }
+
+    .menu-checkbox:checked ~ .nav-links {
+        display: flex;
+    }
+
+    .nav-links li {
+        text-align: right;
+    }
+}
+
+/* Technical hidden checkbox */
+.menu-checkbox {
+    display: none;
+}
+
+/* Extra touch: Smooth scroll buttons */
 .btn-quote {
     background: var(--dark-grey);
     color: white !important;
     padding: 0.7rem 1.4rem;
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
+    border-radius: 5px;
 }
