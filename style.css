@@ -1,85 +1,92 @@
-:root {
-    --brand-yellow: #FFD700;
-    --brand-orange: #FF8C00;
-    --dark: #121212;
-}
-
-* { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
-
-body {
-    font-family: 'Inter', sans-serif;
-    background: linear-gradient(135deg, var(--brand-yellow), var(--brand-orange));
-    background-attachment: fixed;
-    color: var(--dark);
-}
-
-/* Navbar: Parallel Top Right Menu */
-.navbar {
+/* --- Hero Section Refinement --- */
+.hero {
+    height: 100vh; /* Full screen height */
+    width: 100%;
+    /* 1. Add your new image here */
+    background-image: url('hero_bg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Parallax effect similar to BrightGen */
+    position: relative;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 1rem 8%;
-    position: sticky;
+    justify-content: left; /* Align text block to the left, like reference */
+    padding: 0 10%;
+}
+
+/* 2. Overlaid Tint for Contrast (Magical Replicated Look) */
+.hero::before {
+    content: '';
+    position: absolute;
     top: 0;
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(15px);
-    z-index: 1000;
-    border-bottom: 1px solid rgba(255,255,255,0.2);
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Adjust opacity (0.5) to make image darker/lighter */
+    background: rgba(0, 0, 0, 0.5); 
+    z-index: 1;
 }
 
-.main-logo { height: 50px; mix-blend-mode: multiply; }
+/* 3. Replicated Text Block Styles */
+.hero-text-block {
+    position: relative;
+    z-index: 10; /* Put text above the tint */
+    color: white; /* Clean contrast */
+    max-width: 650px;
+    text-align: left;
+}
 
-.nav-links { display: flex; list-style: none; gap: 2.5rem; align-items: center; }
-.nav-links a { text-decoration: none; color: var(--dark); font-weight: 700; }
+.hero h1 {
+    font-size: 5rem;
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 0.2rem;
+    letter-spacing: -2px;
+}
 
-.btn-quote {
-    background: var(--dark);
-    color: white !important;
-    padding: 0.7rem 1.4rem;
+.hero h2 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    line-height: 1.2;
+}
+
+/* The Yellowish Orange Highlight for Tagline */
+.hero h2 span {
+    color: var(--brand-orange); 
+}
+
+.hero p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 3rem;
+    opacity: 0.9;
+}
+
+/* 4. Parallel Action Buttons */
+.hero-actions {
+    display: flex;
+    gap: 1rem;
+}
+
+.cta-primary {
+    background: var(--dark-grey);
+    color: white;
+    padding: 1rem 2rem;
     border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
 }
 
-/* Infinite Scroll Logics */
-.client-marquee { padding: 60px 0; overflow: hidden; }
-.marquee-wrapper { display: flex; overflow: hidden; }
-.marquee-content {
-    display: flex;
-    animation: scroll 40s linear infinite;
+.cta-secondary {
+    background: transparent;
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 4px;
+    border: 1px solid white;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
 }
-
-.logo-item {
-    width: 200px;
-    margin: 0 40px;
-    display: flex;
-    align-items: center;
-}
-
-.logo-item img {
-    max-width: 100%;
-    mix-blend-mode: multiply; /* Blends logos into yellow/orange background */
-}
-
-@keyframes scroll {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-}
-
-/* Responsive Mobile Layout */
-@media (max-width: 768px) {
-    .nav-links {
-        display: none;
-        position: absolute;
-        top: 100%;
-        right: 0;
-        width: 200px;
-        background: white;
-        flex-direction: column;
-        padding: 20px;
-        box-shadow: -5px 10px 20px rgba(0,0,0,0.1);
-    }
-    .menu-checkbox:checked ~ .nav-links { display: flex; }
-    .hamburger { display: flex; flex-direction: column; gap: 5px; cursor: pointer; }
-    .hamburger span { width: 25px; height: 3px; background: var(--dark); }
-}
-
-.menu-checkbox { display: none; }
