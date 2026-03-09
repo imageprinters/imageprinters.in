@@ -134,18 +134,54 @@
   .contact-item:hover { color:#fff; }
 
   /* CLIENTS SCROLL */
-  .clients-sec { padding:70px 0; overflow:hidden; }
-  .clients-sec .sec-label,.clients-sec .sec-title { padding:0 5vw; }
-  .scroll-wrap { overflow:hidden; margin-top:40px; position:relative; }
-  .scroll-wrap::before,.scroll-wrap::after { content:''; position:absolute; top:0; bottom:0; width:100px; z-index:2; pointer-events:none; }
-  .scroll-wrap::before { left:0; background:linear-gradient(to right,var(--paper),transparent); }
-  .scroll-wrap::after { right:0; background:linear-gradient(to left,var(--paper),transparent); }
-  .scroll-track { display:flex; gap:28px; align-items:center; width:max-content; animation:scrollLeft 35s linear infinite; }
-  .scroll-track:hover { animation-play-state:paused; }
-  @keyframes scrollLeft { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
-  .logo-card { width:130px; height:80px; flex-shrink:0; background:#fff; border:1px solid var(--border); border-radius:8px; display:flex; align-items:center; justify-content:center; padding:10px; transition:box-shadow 0.2s; }
-  .logo-card:hover { box-shadow:0 4px 18px rgba(0,0,0,0.1); }
-  .logo-card img { max-width:100%; max-height:100%; object-fit:contain; }
+.clients-sec { padding: 70px 0; overflow: hidden; }
+.clients-sec .sec-label, .clients-sec .sec-title { padding: 0 5vw; }
+.scroll-wrap { overflow: hidden; margin-top: 40px; position: relative; }
+
+.scroll-wrap::before, .scroll-wrap::after { 
+  content: ''; 
+  position: absolute; 
+  top: 0; 
+  bottom: 0; 
+  width: 100px; 
+  z-index: 2; 
+  pointer-events: none; 
+}
+.scroll-wrap::before { left: 0; background: linear-gradient(to right, var(--paper), transparent); }
+.scroll-wrap::after { right: 0; background: linear-gradient(to left, var(--paper), transparent); }
+
+.scroll-track { 
+  display: flex; 
+  /* Removed the gap property from here */
+  align-items: center; 
+  width: max-content; 
+  animation: scrollLeft 35s linear infinite; 
+}
+
+.scroll-track:hover { animation-play-state: paused; } /* Note: this stops it on hover! */
+
+@keyframes scrollLeft { 
+  0% { transform: translateX(0); } 
+  100% { transform: translateX(-50%); } 
+}
+
+.logo-card { 
+  width: 130px; 
+  height: 80px; 
+  flex-shrink: 0; 
+  margin-right: 28px; /* Added spacing here instead of gap */
+  background: #fff; 
+  border: 1px solid var(--border); 
+  border-radius: 8px; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  padding: 10px; 
+  transition: box-shadow 0.2s; 
+}
+
+.logo-card:hover { box-shadow: 0 4px 18px rgba(0,0,0,0.1); }
+.logo-card img { max-width: 100%; max-height: 100%; object-fit: contain; }
 
   /* LOCATION */
   .loc-sec { background:var(--ink); }
