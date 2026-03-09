@@ -1,55 +1,53 @@
-.client-marquee-section {
-    padding: 60px 0;
-    overflow: hidden;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(5px);
-}
-
-.client-marquee-section h2 {
-    text-align: center;
-    margin-bottom: 40px;
-    font-size: 1.8rem;
-    color: #1a1a1a;
-}
-
-.marquee-container {
-    width: 100%;
-    overflow: hidden;
-    position: relative;
+/* Navigation Container */
+.navbar {
     display: flex;
+    justify-content: space-between; /* Pushes logo to left, nav to right */
+    align-items: center;            /* Vertically centers both in the row */
+    padding: 1rem 8%;
+    position: sticky;
+    top: 0;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    z-index: 1000;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
 }
 
-.marquee-content {
+/* Logo Box */
+.logo-box {
     display: flex;
-    width: max-content;
-    animation: scroll 40s linear infinite; /* Adjust time for speed */
+    align-items: center; /* Ensures the logo image is centered within its container */
 }
 
-/* Pause on hover so people can see specific clients */
-.marquee-content:hover {
-    animation-play-state: paused;
+.main-logo { 
+    height: 50px; 
+    width: auto;
+    mix-blend-mode: multiply; 
+    display: block; /* Removes any default bottom spacing */
 }
 
-.marquee-item {
-    flex: 0 0 auto;
-    width: 180px;
-    height: 100px;
-    margin: 0 30px;
+/* Navigation Links */
+.nav-links { 
+    display: flex; 
+    list-style: none; 
+    gap: 2.5rem; 
+    align-items: center; /* Keeps text parallel to the center of the logo */
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links a { 
+    text-decoration: none; 
+    color: var(--dark-grey); 
+    font-weight: 700; 
+    font-size: 0.95rem;
+    line-height: 1; /* Prevents text from shifting vertically */
+}
+
+.btn-quote {
+    background: var(--dark-grey);
+    color: white !important;
+    padding: 0.7rem 1.4rem;
+    border-radius: 4px;
     display: flex;
     align-items: center;
-    justify-content: center;
-}
-
-.marquee-item img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-    /* MAGIC MERGE: Removes white background from JPEGs */
-    mix-blend-mode: multiply; 
-    filter: contrast(1.1);
-}
-
-@keyframes scroll {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); } /* Scrolls exactly halfway (one set of logos) */
 }
