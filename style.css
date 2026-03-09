@@ -91,7 +91,7 @@ section { padding:90px 5vw; }
 /* ABOUT */
 .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; margin-top:56px; }
 
-..about-visual-main { position: relative; }
+.about-visual-main { position: relative; }
 
 .print-anim {
   position: absolute;
@@ -119,13 +119,9 @@ section { padding:90px 5vw; }
   object-fit: contain;
 }
 
-.print-anim { position:absolute; inset:0; display:flex; flex-direction:column; gap:12px; align-items:center; justify-content:center; padding:20px; }
-
 .print-line { height:3px; border-radius:2px; background:linear-gradient(90deg,var(--gold),transparent); animation:printLine 2.5s ease-in-out infinite; }
 
 @keyframes printLine { 0%{width:0;opacity:0} 50%{width:80%;opacity:1} 100%{width:0;opacity:0} }
-
-.about-logo-overlay { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; }
 
 .about-logo-overlay img { max-width:55%; max-height:55%; object-fit:contain; border-radius:8px; }
 
@@ -160,15 +156,35 @@ section { padding:90px 5vw; }
 
 .proc-step:hover { background:rgba(201,168,76,0.08); }
 
-.proc-num { font-family:'Playfair Display',serif; font-size:3.8rem; font-weight:900; color:rgba(201,168,76,0.18); line-height:1; margin-bottom:14px; }
+.proc-num { font-family:'Playfair Display',serif; font-size:3.8rem; font-weight:900; color:rgba(201,168,76,0.18); line-height:1; margin-bottom:14px; transition:color 0.3s ease, text-shadow 0.3s ease; }
 
-.proc-icon { font-size:1.7rem; margin-bottom:10px; }
+.proc-step:hover .proc-num { color:var(--gold-light); text-shadow:0 0 20px rgba(201,168,76,0.4); }
+
+.proc-icon { font-size:1.7rem; margin-bottom:10px; display:inline-block; transition:transform 0.3s ease; }
+
+.proc-step:hover .proc-icon { transform:scale(1.3) rotate(-5deg); }
 
 .proc-step h3 { color:var(--paper); font-size:1rem; font-weight:600; margin-bottom:8px; }
 
 .proc-step p { color:rgba(250,248,243,0.5); font-size:0.83rem; line-height:1.6; }
 
-.proc-arrow { position:absolute; right:-14px; top:50%; transform:translateY(-50%); color:var(--gold); font-size:1.3rem; z-index:2; }
+.proc-arrow { position:absolute; right:-14px; top:50%; transform:translateY(-50%); color:var(--gold); font-size:1.3rem; z-index:2; display:inline-block; animation:arrowPulse 1.2s ease-in-out infinite; }
+
+@keyframes arrowPulse {
+  0%   { transform:translateY(-50%) translateX(0);   opacity:1; }
+  50%  { transform:translateY(-50%) translateX(6px); opacity:0.4; }
+  100% { transform:translateY(-50%) translateX(0);   opacity:1; }
+}
+
+/* PROCESS SCROLL-IN ANIMATION */
+.proc-step { opacity:0; transform:translateY(40px); transition:background 0.3s, opacity 0.6s ease, transform 0.6s ease; }
+
+.proc-step.visible { opacity:1; transform:translateY(0); }
+
+.proc-step:nth-child(1) { transition-delay:0.1s; }
+.proc-step:nth-child(2) { transition-delay:0.3s; }
+.proc-step:nth-child(3) { transition-delay:0.5s; }
+.proc-step:nth-child(4) { transition-delay:0.7s; }
 
 /* SERVICES */
 .svc-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:52px; }
@@ -238,105 +254,43 @@ section { padding:90px 5vw; }
 
 .contact-item:hover { color:#fff; }
 
-/* ==================== CLIENTS SCROLL - REWRITTEN FOR IMAGE UPLOADS ==================== */
+/* CLIENTS SCROLL */
+.clients-sec { padding:70px 0; overflow:hidden; }
 
-.clients-sec { 
-  padding: 70px 0; 
-  overflow: hidden; 
-}
+.clients-sec .sec-label,
+.clients-sec .sec-title { padding:0 5vw; }
 
-.clients-sec .sec-label, 
-.clients-sec .sec-title { 
-  padding: 0 5vw; 
-}
+.scroll-wrap { overflow:hidden; margin-top:40px; position:relative; }
 
-.scroll-wrap { 
-  overflow: hidden; 
-  margin-top: 40px; 
-  position: relative; 
-}
+.scroll-wrap::before,
+.scroll-wrap::after { content:''; position:absolute; top:0; bottom:0; width:100px; z-index:2; pointer-events:none; }
 
-.scroll-wrap::before, 
-.scroll-wrap::after { 
-  content: ''; 
-  position: absolute; 
-  top: 0; 
-  bottom: 0; 
-  width: 100px; 
-  z-index: 2; 
-  pointer-events: none; 
-}
+.scroll-wrap::before { left:0; background:linear-gradient(to right, var(--paper), transparent); }
 
-.scroll-wrap::before { 
-  left: 0; 
-  background: linear-gradient(to right, var(--paper), transparent); 
-}
+.scroll-wrap::after { right:0; background:linear-gradient(to left, var(--paper), transparent); }
 
-.scroll-wrap::after { 
-  right: 0; 
-  background: linear-gradient(to left, var(--paper), transparent); 
-}
+.scroll-track { display:flex; align-items:center; width:max-content; animation:scrollLeft 35s linear infinite; }
 
-.scroll-track { 
-  display: flex; 
-  align-items: center; 
-  width: max-content; 
-  animation: scrollLeft 35s linear infinite; 
-}
+.scroll-track:hover { animation-play-state:paused; }
 
-.scroll-track:hover { 
-  animation-play-state: paused; 
-}
+@keyframes scrollLeft { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
 
-@keyframes scrollLeft { 
-  0% { transform: translateX(0); } 
-  100% { transform: translateX(-50%); } 
-}
+.logo-card { width:130px; height:80px; flex-shrink:0; margin-right:28px; background:#fff; border:1px solid var(--border); border-radius:8px; display:flex; align-items:center; justify-content:center; padding:10px; transition:box-shadow 0.2s; background-size:contain; background-repeat:no-repeat; background-position:center; }
 
-/* ==================== LOGO CARD - BACKGROUND IMAGE VERSION ==================== */
-/* 
-   HOW TO USE:
-   1. Upload your client logos as: logo1.jpeg, logo2.jpeg, logo3.jpeg, etc.
-   2. Keep folder structure: ./images/logos/
-   3. Add new cards in HTML with data-logo attribute
-   4. CSS will automatically load and style the background image
-*/
+.logo-card:hover { box-shadow:0 4px 18px rgba(0,0,0,0.1); }
 
-.logo-card { 
-  width: 130px; 
-  height: 80px; 
-  flex-shrink: 0; 
-  margin-right: 28px;
-  background: #fff; 
-  border: 1px solid var(--border); 
-  border-radius: 8px; 
-  display: flex; 
-  align-items: center; 
-  justify-content: center; 
-  padding: 10px; 
-  transition: box-shadow 0.2s;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
-.logo-card:hover { 
-  box-shadow: 0 4px 18px rgba(0,0,0,0.1); 
-}
-
-/* INDIVIDUAL LOGO BACKGROUNDS - EASY TO UPDATE */
-.logo-card[data-logo="1"] { background-image: url('./images/logos/logo1.jpeg'); }
-.logo-card[data-logo="2"] { background-image: url('./images/logos/logo2.jpeg'); }
-.logo-card[data-logo="3"] { background-image: url('./images/logos/logo3.jpeg'); }
-.logo-card[data-logo="4"] { background-image: url('./images/logos/logo4.jpeg'); }
-.logo-card[data-logo="5"] { background-image: url('./images/logos/logo5.jpeg'); }
-.logo-card[data-logo="6"] { background-image: url('./images/logos/logo6.jpeg'); }
-.logo-card[data-logo="7"] { background-image: url('./images/logos/logo7.jpeg'); }
-.logo-card[data-logo="8"] { background-image: url('./images/logos/logo8.jpeg'); }
-.logo-card[data-logo="9"] { background-image: url('./images/logos/logo9.jpeg'); }
-.logo-card[data-logo="10"] { background-image: url('./images/logos/logo10.jpeg'); }
-.logo-card[data-logo="11"] { background-image: url('./images/logos/logo11.jpeg'); }
-.logo-card[data-logo="12"] { background-image: url('./images/logos/logo12.jpeg'); }
+.logo-card[data-logo="1"]  { background-image:url('./images/logos/logo1.jpeg'); }
+.logo-card[data-logo="2"]  { background-image:url('./images/logos/logo2.jpeg'); }
+.logo-card[data-logo="3"]  { background-image:url('./images/logos/logo3.jpeg'); }
+.logo-card[data-logo="4"]  { background-image:url('./images/logos/logo4.jpeg'); }
+.logo-card[data-logo="5"]  { background-image:url('./images/logos/logo5.jpeg'); }
+.logo-card[data-logo="6"]  { background-image:url('./images/logos/logo6.jpeg'); }
+.logo-card[data-logo="7"]  { background-image:url('./images/logos/logo7.jpeg'); }
+.logo-card[data-logo="8"]  { background-image:url('./images/logos/logo8.jpeg'); }
+.logo-card[data-logo="9"]  { background-image:url('./images/logos/logo9.jpeg'); }
+.logo-card[data-logo="10"] { background-image:url('./images/logos/logo10.jpeg'); }
+.logo-card[data-logo="11"] { background-image:url('./images/logos/logo11.jpeg'); }
+.logo-card[data-logo="12"] { background-image:url('./images/logos/logo12.jpeg'); }
 
 /* LOCATION */
 .loc-sec { background:var(--ink); }
