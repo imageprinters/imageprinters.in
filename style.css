@@ -279,18 +279,21 @@ section { padding:90px 5vw; }
 
 .logo-card:hover { box-shadow:0 4px 18px rgba(0,0,0,0.1); }
 
-.logo-card[data-logo="1"]  { background-image:url('./images/logos/logo1.jpeg'); }
-.logo-card[data-logo="2"]  { background-image:url('./images/logos/logo2.jpeg'); }
-.logo-card[data-logo="3"]  { background-image:url('./images/logos/logo3.jpeg'); }
-.logo-card[data-logo="4"]  { background-image:url('./images/logos/logo4.jpeg'); }
-.logo-card[data-logo="5"]  { background-image:url('./images/logos/logo5.jpeg'); }
-.logo-card[data-logo="6"]  { background-image:url('./images/logos/logo6.jpeg'); }
-.logo-card[data-logo="7"]  { background-image:url('./images/logos/logo7.jpeg'); }
-.logo-card[data-logo="8"]  { background-image:url('./images/logos/logo8.jpeg'); }
-.logo-card[data-logo="9"]  { background-image:url('./images/logos/logo9.jpeg'); }
-.logo-card[data-logo="10"] { background-image:url('./images/logos/logo10.jpeg'); }
-.logo-card[data-logo="11"] { background-image:url('./images/logos/logo11.jpeg'); }
-.logo-card[data-logo="12"] { background-image:url('./images/logos/logo12.jpeg'); }
+.logo-card[data-logo="1"]  { background-image: url('./logo1.jpeg'); }
+.logo-card[data-logo="2"]  { background-image: url('./logo2.jpeg'); }
+.logo-card[data-logo="3"]  { background-image: url('./logo3.jpeg'); }
+.logo-card[data-logo="4"]  { background-image: url('./logo4.jpeg'); }
+.logo-card[data-logo="5"]  { background-image: url('./logo5.jpeg'); }
+.logo-card[data-logo="6"]  { background-image: url('./logo6.jpeg'); }
+.logo-card[data-logo="7"]  { background-image: url('./logo7.jpeg'); }
+.logo-card[data-logo="8"]  { background-image: url('./logo8.jpeg'); }
+.logo-card[data-logo="9"]  { background-image: url('./logo9.jpeg'); }
+.logo-card[data-logo="10"] { background-image: url('./logo10.jpeg'); }
+.logo-card[data-logo="11"] { background-image: url('./logo11.jpeg'); }
+.logo-card[data-logo="12"] { background-image: url('./logo12.jpeg'); }
+.logo-card[data-logo="13"] { background-image: url('./logo13.jpeg'); }
+.logo-card[data-logo="14"] { background-image: url('./logo14.jpeg'); }
+.logo-card[data-logo="15"] { background-image: url('./logo15.jpeg'); }
 
 /* LOCATION */
 .loc-sec { background:var(--ink); }
