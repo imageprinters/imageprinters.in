@@ -1,122 +1,85 @@
-/* Color Palette from your Logo */
 :root {
     --brand-yellow: #FFD700;
     --brand-orange: #FF8C00;
-    --dark-grey: #1a1a1a;
-    --glass-white: rgba(255, 255, 255, 0.2);
+    --dark: #121212;
 }
 
-/* 1. Global Background - Yellowish Orange Gradient */
+* { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+
 body {
-    margin: 0;
     font-family: 'Inter', sans-serif;
     background: linear-gradient(135deg, var(--brand-yellow), var(--brand-orange));
-    background-attachment: fixed; /* Keeps background still while scrolling */
-    color: var(--dark-grey);
+    background-attachment: fixed;
+    color: var(--dark);
 }
 
-/* 2. Navigation Container (Top Right Alignment) */
+/* Navbar: Parallel Top Right Menu */
 .navbar {
     display: flex;
-    justify-content: space-between; 
+    justify-content: space-between;
     align-items: center;
     padding: 1rem 8%;
     position: sticky;
     top: 0;
-    background: rgba(255, 255, 255, 0.15); /* Glass effect */
-    backdrop-filter: blur(12px);
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px);
     z-index: 1000;
     border-bottom: 1px solid rgba(255,255,255,0.2);
 }
 
-/* Logo Alignment */
-.logo-box {
+.main-logo { height: 50px; mix-blend-mode: multiply; }
+
+.nav-links { display: flex; list-style: none; gap: 2.5rem; align-items: center; }
+.nav-links a { text-decoration: none; color: var(--dark); font-weight: 700; }
+
+.btn-quote {
+    background: var(--dark);
+    color: white !important;
+    padding: 0.7rem 1.4rem;
+    border-radius: 4px;
+}
+
+/* Infinite Scroll Logics */
+.client-marquee { padding: 60px 0; overflow: hidden; }
+.marquee-wrapper { display: flex; overflow: hidden; }
+.marquee-content {
+    display: flex;
+    animation: scroll 40s linear infinite;
+}
+
+.logo-item {
+    width: 200px;
+    margin: 0 40px;
     display: flex;
     align-items: center;
 }
 
-.main-logo {
-    height: 50px;
-    width: auto;
-    mix-blend-mode: multiply; /* Blends logo background into the orange */
+.logo-item img {
+    max-width: 100%;
+    mix-blend-mode: multiply; /* Blends logos into yellow/orange background */
 }
 
-/* Nav Links - Desktop View */
-.nav-links {
-    display: flex;
-    list-style: none;
-    gap: 2.5rem;
-    align-items: center;
-    margin: 0;
-    padding: 0;
+@keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
 }
 
-.nav-links a {
-    text-decoration: none;
-    color: var(--dark-grey);
-    font-weight: 700;
-    transition: 0.3s;
-}
-
-.nav-links a:hover {
-    color: white;
-}
-
-/* 3. Mobile View Layout */
+/* Responsive Mobile Layout */
 @media (max-width: 768px) {
-    .navbar {
-        padding: 1rem 5%;
-    }
-
-    /* Hamburger icon stays at top right */
-    .hamburger {
-        display: flex;
-        flex-direction: column;
-        gap: 5px;
-        cursor: pointer;
-        order: 2; 
-    }
-
-    .hamburger span {
-        width: 25px;
-        height: 3px;
-        background: var(--dark-grey);
-        border-radius: 2px;
-    }
-
-    /* Dropdown menu appearing from the right */
     .nav-links {
         display: none;
         position: absolute;
         top: 100%;
-        right: 0; 
-        width: 220px;
-        background: white; /* Contrast for mobile menu readability */
+        right: 0;
+        width: 200px;
+        background: white;
         flex-direction: column;
-        padding: 25px;
-        gap: 1.5rem;
+        padding: 20px;
         box-shadow: -5px 10px 20px rgba(0,0,0,0.1);
-        border-bottom-left-radius: 20px;
     }
-
-    .menu-checkbox:checked ~ .nav-links {
-        display: flex;
-    }
-
-    .nav-links li {
-        text-align: right;
-    }
+    .menu-checkbox:checked ~ .nav-links { display: flex; }
+    .hamburger { display: flex; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { width: 25px; height: 3px; background: var(--dark); }
 }
 
-/* Technical hidden checkbox */
-.menu-checkbox {
-    display: none;
-}
-
-/* Extra touch: Smooth scroll buttons */
-.btn-quote {
-    background: var(--dark-grey);
-    color: white !important;
-    padding: 0.7rem 1.4rem;
-    border-radius: 5px;
-}
+.menu-checkbox { display: none; }
