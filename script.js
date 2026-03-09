@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
-/* ==================== SCROLL ANIMATIONS - OPTIONAL ==================== */
+/* ==================== SCROLL ANIMATIONS ==================== */
 
 const observerOptions = {
   threshold: 0.1,
@@ -76,6 +76,23 @@ document.addEventListener('DOMContentLoaded', function() {
   sections.forEach(section => {
     observer.observe(section);
   });
+});
+
+/* ==================== PROCESS STEPS SCROLL-IN ANIMATION ==================== */
+
+document.addEventListener('DOMContentLoaded', function() {
+  const procSteps = document.querySelectorAll('.proc-step');
+
+  const procObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        procObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+
+  procSteps.forEach(step => procObserver.observe(step));
 });
 
 /* ==================== NAVBAR BACKGROUND ON SCROLL ==================== */
