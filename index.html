@@ -22,68 +22,19 @@
 
   /* ===== PRELOADER ===== */
   #preloader {
-    position: fixed;
-    inset: 0;
-    z-index: 9999;
-    background: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    position: fixed; inset: 0; z-index: 9999; background: #fff;
+    display: flex; align-items: center; justify-content: center;
     transition: opacity 0.6s ease, visibility 0.6s ease;
   }
   #preloader.hidden { opacity:0; visibility:hidden; }
-
-  .pre-logo-container {
-    position: relative;
-    width: 130px;
-    height: 170px;
-  }
-
-  /* All layers share the same logo image, each clipped to one region */
-  .pre-layer {
-    position: absolute;
-    inset: 0;
-    background: url('logo.jpg') center / contain no-repeat;
-    opacity: 0;
-  }
-
-  /* Step 1 — orange dot at top */
-  .pre-layer-dot {
-    clip-path: inset(0% 32% 76% 32%);
-    animation: layerPop 0.4s cubic-bezier(0.34,1.56,0.64,1) forwards;
-    animation-delay: 0.15s;
-  }
-
-  /* Step 2 — orange arc/swoosh body */
-  .pre-layer-arc {
-    clip-path: inset(5% 2% 38% 2%);
-    animation: layerSlide 0.55s ease forwards;
-    animation-delay: 0.65s;
-  }
-
-  /* Step 3 — "IMAGE" orange text */
-  .pre-layer-image {
-    clip-path: inset(62% 5% 20% 5%);
-    animation: layerSlide 0.4s ease forwards;
-    animation-delay: 1.3s;
-  }
-
-  /* Step 4 — "PRINTERS" dark text */
-  .pre-layer-printers {
-    clip-path: inset(80% 5% 2% 5%);
-    animation: layerSlide 0.4s ease forwards;
-    animation-delay: 1.75s;
-  }
-
-  @keyframes layerPop {
-    0%   { opacity:0; transform:scale(0.4); }
-    70%  { opacity:1; transform:scale(1.15); }
-    100% { opacity:1; transform:scale(1); }
-  }
-  @keyframes layerSlide {
-    0%   { opacity:0; transform:translateY(8px); }
-    100% { opacity:1; transform:translateY(0); }
-  }
+  .pre-logo-container { position: relative; width: 130px; height: 170px; }
+  .pre-layer { position: absolute; inset: 0; background: url('logo.jpg') center / contain no-repeat; opacity: 0; }
+  .pre-layer-dot { clip-path: inset(0% 32% 76% 32%); animation: layerPop 0.4s cubic-bezier(0.34,1.56,0.64,1) forwards; animation-delay: 0.15s; }
+  .pre-layer-arc { clip-path: inset(5% 2% 38% 2%); animation: layerSlide 0.55s ease forwards; animation-delay: 0.65s; }
+  .pre-layer-image { clip-path: inset(62% 5% 20% 5%); animation: layerSlide 0.4s ease forwards; animation-delay: 1.3s; }
+  .pre-layer-printers { clip-path: inset(80% 5% 2% 5%); animation: layerSlide 0.4s ease forwards; animation-delay: 1.75s; }
+  @keyframes layerPop { 0%{opacity:0;transform:scale(0.4)} 70%{opacity:1;transform:scale(1.15)} 100%{opacity:1;transform:scale(1)} }
+  @keyframes layerSlide { 0%{opacity:0;transform:translateY(8px)} 100%{opacity:1;transform:translateY(0)} }
 
   /* NAV */
   nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-items:center; justify-content:space-between; padding:0 5vw; height:72px; background:rgba(250,248,243,0.95); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); }
@@ -130,14 +81,11 @@
   /* ABOUT */
   .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; margin-top:56px; }
   .about-visual-main { width:100%; aspect-ratio:4/3; border-radius:8px; background:var(--ink); display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; }
-
-  /* FIX 1: z-index so logo shows IN FRONT of animation lines */
   .print-anim { position:absolute; inset:0; z-index:1; display:flex; flex-direction:column; gap:12px; align-items:center; justify-content:center; padding:20px; }
   .print-line { height:3px; border-radius:2px; background:linear-gradient(90deg,var(--gold),transparent); animation:printLine 2.5s ease-in-out infinite; }
   @keyframes printLine { 0%{width:0;opacity:0} 50%{width:80%;opacity:1} 100%{width:0;opacity:0} }
   .about-logo-overlay { position:absolute; inset:0; z-index:2; display:flex; align-items:center; justify-content:center; }
   .about-logo-overlay img { max-width:55%; max-height:55%; object-fit:contain; border-radius:8px; }
-
   .about-badge { position:absolute; bottom:-18px; right:-18px; background:var(--gold); color:#fff; padding:18px 22px; border-radius:8px; text-align:center; box-shadow:0 8px 28px rgba(201,168,76,0.4); }
   .about-badge .bn { font-family:'Playfair Display',serif; font-size:2.4rem; font-weight:900; display:block; }
   .about-badge .bt { font-size:0.72rem; font-weight:600; letter-spacing:0.06em; }
@@ -153,8 +101,6 @@
   .process-bg .sec-title { color:var(--paper); }
   .process-bg .sec-sub { color:rgba(250,248,243,0.55); }
   .process-steps { display:grid; grid-template-columns:repeat(4,1fr); gap:2px; margin-top:52px; }
-
-  /* FIX 2: Process step animations */
   .proc-step { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.07); padding:32px 22px; position:relative; opacity:0; transform:translateY(40px); transition:background 0.3s, opacity 0.6s ease, transform 0.6s ease; }
   .proc-step.visible { opacity:1; transform:translateY(0); }
   .proc-step:nth-child(1) { transition-delay:0.1s; }
@@ -162,35 +108,35 @@
   .proc-step:nth-child(3) { transition-delay:0.5s; }
   .proc-step:nth-child(4) { transition-delay:0.7s; }
   .proc-step:hover { background:rgba(201,168,76,0.08); }
-
   .proc-num { font-family:'Playfair Display',serif; font-size:3.8rem; font-weight:900; color:rgba(201,168,76,0.18); line-height:1; margin-bottom:14px; transition:color 0.3s ease, text-shadow 0.3s ease; }
   .proc-step:hover .proc-num { color:var(--gold-light); text-shadow:0 0 20px rgba(201,168,76,0.4); }
-
   .proc-icon { font-size:1.7rem; margin-bottom:10px; display:inline-block; transition:transform 0.3s ease; }
   .proc-step:hover .proc-icon { transform:scale(1.3) rotate(-5deg); }
-
   .proc-step h3 { color:var(--paper); font-size:1rem; font-weight:600; margin-bottom:8px; }
   .proc-step p { color:rgba(250,248,243,0.5); font-size:0.83rem; line-height:1.6; }
-
   .proc-arrow { position:absolute; right:-14px; top:50%; color:var(--gold); font-size:1.3rem; z-index:2; display:inline-block; animation:arrowPulse 1.2s ease-in-out infinite; }
-  @keyframes arrowPulse {
-    0%   { transform:translateY(-50%) translateX(0);   opacity:1; }
-    50%  { transform:translateY(-50%) translateX(6px); opacity:0.4; }
-    100% { transform:translateY(-50%) translateX(0);   opacity:1; }
-  }
+  @keyframes arrowPulse { 0%{transform:translateY(-50%) translateX(0);opacity:1} 50%{transform:translateY(-50%) translateX(6px);opacity:0.4} 100%{transform:translateY(-50%) translateX(0);opacity:1} }
 
   /* ===== SERVICE CARD MOCKUPS ===== */
-  .svc-img { width:100%; aspect-ratio:16/9; display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; }
-  .svc-overlay { position:absolute; inset:0; background:linear-gradient(135deg,rgba(201,168,76,0.15),transparent); z-index:1; }
+  .svc-img { width:100%; aspect-ratio:16/9; display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; cursor:pointer; }
+  .svc-overlay { position:absolute; inset:0; background:linear-gradient(135deg,rgba(201,168,76,0.15),transparent); z-index:1; transition:0.3s; }
+  .svc-img:hover .svc-overlay { background:linear-gradient(135deg,rgba(201,168,76,0.32),rgba(0,0,0,0.18)); }
   .mockup-wrap { position:relative; z-index:2; display:flex; align-items:center; justify-content:center; width:100%; height:100%; }
 
-  /* ---- ID CARD MOCKUP ---- */
-  .id-card {
-    width:72px; height:100px; background:#fff; border-radius:6px;
-    box-shadow:0 6px 18px rgba(0,0,0,0.35);
-    display:flex; flex-direction:column; overflow:hidden;
-    transform:rotate(-5deg); margin-right:-12px;
+  /* Click hint */
+  .svc-click-hint {
+    position:absolute; bottom:8px; right:10px; z-index:3;
+    background:rgba(201,168,76,0.92); color:#fff;
+    font-size:0.62rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase;
+    padding:4px 10px; border-radius:20px;
+    opacity:0; transform:translateY(4px);
+    transition:opacity 0.25s, transform 0.25s;
+    pointer-events:none;
   }
+  .svc-img:hover .svc-click-hint { opacity:1; transform:translateY(0); }
+
+  /* ---- ID CARD MOCKUP ---- */
+  .id-card { width:72px; height:100px; background:#fff; border-radius:6px; box-shadow:0 6px 18px rgba(0,0,0,0.35); display:flex; flex-direction:column; overflow:hidden; transform:rotate(-5deg); margin-right:-12px; }
   .id-card-header { height:28px; background:linear-gradient(135deg,#e85d10,#c9a84c); display:flex; align-items:center; justify-content:center; }
   .id-card-header span { width:22px; height:22px; border-radius:50%; background:rgba(255,255,255,0.3); display:block; }
   .id-card-body { padding:6px 6px 4px; flex:1; display:flex; flex-direction:column; gap:4px; align-items:center; }
@@ -200,16 +146,7 @@
   .id-card-barcode { display:flex; gap:2px; margin-top:2px; }
   .id-card-barcode span { width:2px; height:10px; background:#333; border-radius:1px; }
   .id-card-barcode span:nth-child(even) { height:7px; }
-
-  /* ID Tag beside card */
-  .id-tag {
-    width:52px; height:70px; background:#fff8f0; border-radius:4px;
-    box-shadow:0 4px 14px rgba(0,0,0,0.25);
-    display:flex; flex-direction:column; align-items:center;
-    padding:6px 4px; gap:4px;
-    transform:rotate(6deg) translateY(10px);
-    border-top:4px solid #e85d10;
-  }
+  .id-tag { width:52px; height:70px; background:#fff8f0; border-radius:4px; box-shadow:0 4px 14px rgba(0,0,0,0.25); display:flex; flex-direction:column; align-items:center; padding:6px 4px; gap:4px; transform:rotate(6deg) translateY(10px); border-top:4px solid #e85d10; }
   .id-tag-hole { width:12px; height:12px; border-radius:50%; border:2px solid #e85d10; margin-top:-2px; }
   .id-tag-string { width:1px; height:20px; background:#aaa; margin:-4px auto; }
   .id-tag-line { height:3px; border-radius:2px; background:#e0dbd0; width:80%; }
@@ -217,12 +154,7 @@
 
   /* ---- FLYER + BROCHURE MOCKUP ---- */
   .flyer-stack { position:relative; display:flex; align-items:flex-end; gap:0; }
-  .flyer {
-    width:65px; height:90px; border-radius:4px;
-    box-shadow:0 6px 16px rgba(0,0,0,0.3);
-    display:flex; flex-direction:column; overflow:hidden;
-    padding:8px 6px; gap:5px;
-  }
+  .flyer { width:65px; height:90px; border-radius:4px; box-shadow:0 6px 16px rgba(0,0,0,0.3); display:flex; flex-direction:column; overflow:hidden; padding:8px 6px; gap:5px; }
   .flyer-1 { background:linear-gradient(160deg,#1b4332,#2d6a4f); transform:rotate(-8deg) translateX(10px); }
   .flyer-2 { background:linear-gradient(160deg,#1a1a2e,#16213e); transform:rotate(-3deg); }
   .flyer-title { height:7px; background:rgba(255,255,255,0.8); border-radius:3px; width:80%; }
@@ -232,14 +164,7 @@
   .flyer-line.w45 { width:45%; }
   .flyer-img-box { height:28px; background:rgba(255,255,255,0.12); border-radius:3px; margin-bottom:2px; display:flex; align-items:center; justify-content:center; }
   .flyer-img-box span { font-size:14px; }
-
-  /* Brochure (tri-fold) */
-  .brochure {
-    width:80px; height:90px;
-    display:flex; border-radius:4px; overflow:hidden;
-    box-shadow:0 6px 16px rgba(0,0,0,0.3);
-    transform:rotate(4deg) translateX(-8px);
-  }
+  .brochure { width:80px; height:90px; display:flex; border-radius:4px; overflow:hidden; box-shadow:0 6px 16px rgba(0,0,0,0.3); transform:rotate(4deg) translateX(-8px); }
   .brochure-panel { flex:1; display:flex; flex-direction:column; padding:5px 3px; gap:3px; }
   .brochure-panel:nth-child(1) { background:#3d0000; border-right:1px solid rgba(255,255,255,0.1); }
   .brochure-panel:nth-child(2) { background:#5a0000; border-right:1px solid rgba(255,255,255,0.1); }
@@ -249,11 +174,7 @@
 
   /* ---- VISITING CARDS MOCKUP ---- */
   .vcard-stack { position:relative; width:120px; height:80px; }
-  .vcard {
-    position:absolute; width:90px; height:55px; border-radius:5px;
-    padding:8px 10px; display:flex; flex-direction:column; gap:5px;
-    box-shadow:0 4px 14px rgba(0,0,0,0.3);
-  }
+  .vcard { position:absolute; width:90px; height:55px; border-radius:5px; padding:8px 10px; display:flex; flex-direction:column; gap:5px; box-shadow:0 4px 14px rgba(0,0,0,0.3); }
   .vcard:nth-child(1) { background:linear-gradient(135deg,#1a1a1a,#2c2c2c); top:20px; left:20px; transform:rotate(6deg); }
   .vcard:nth-child(2) { background:linear-gradient(135deg,#2c1a0e,#5a3515); top:10px; left:10px; transform:rotate(2deg); }
   .vcard:nth-child(3) { background:linear-gradient(135deg,#0d0d0d,#1a1a1a); top:2px; left:2px; transform:rotate(-3deg); }
@@ -262,12 +183,7 @@
   .vcard-detail { height:3px; background:rgba(255,255,255,0.3); border-radius:2px; width:55%; }
 
   /* ---- LETTERHEAD MOCKUP ---- */
-  .letterhead {
-    width:72px; height:96px; background:#fff; border-radius:3px;
-    box-shadow:0 6px 20px rgba(0,0,0,0.3);
-    padding:0; overflow:hidden;
-    transform:rotate(-3deg);
-  }
+  .letterhead { width:72px; height:96px; background:#fff; border-radius:3px; box-shadow:0 6px 20px rgba(0,0,0,0.3); padding:0; overflow:hidden; transform:rotate(-3deg); }
   .lh-header { height:20px; background:linear-gradient(135deg,#0d0d0d,#333); display:flex; align-items:center; padding:0 6px; gap:4px; }
   .lh-logo-dot { width:10px; height:10px; border-radius:50%; background:#e85d10; }
   .lh-logo-text { flex:1; height:4px; background:rgba(255,255,255,0.7); border-radius:2px; }
@@ -279,23 +195,10 @@
   .lh-line.w50 { width:50%; }
   .lh-gold { height:2px; background:var(--gold); width:100%; margin:4px 0; }
   .lh-footer { position:absolute; bottom:0; left:0; right:0; height:8px; background:#0d0d0d; }
-
-  /* Second sheet behind */
-  .letterhead-2 {
-    width:72px; height:96px; background:#f5f5f5; border-radius:3px;
-    box-shadow:0 4px 12px rgba(0,0,0,0.2);
-    position:absolute; top:8px; left:10px;
-    transform:rotate(4deg);
-    z-index:-1;
-  }
+  .letterhead-2 { width:72px; height:96px; background:#f5f5f5; border-radius:3px; box-shadow:0 4px 12px rgba(0,0,0,0.2); position:absolute; top:8px; left:10px; transform:rotate(4deg); z-index:-1; }
 
   /* ---- DIARY MOCKUP ---- */
-  .diary {
-    width:72px; height:90px; border-radius:4px 8px 8px 4px;
-    box-shadow:0 6px 20px rgba(0,0,0,0.35);
-    display:flex; overflow:hidden;
-    transform:rotate(-4deg);
-  }
+  .diary { width:72px; height:90px; border-radius:4px 8px 8px 4px; box-shadow:0 6px 20px rgba(0,0,0,0.35); display:flex; overflow:hidden; transform:rotate(-4deg); }
   .diary-spine { width:12px; background:linear-gradient(180deg,#7b2d00,#d4682b); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px; }
   .diary-spine span { width:6px; height:1px; background:rgba(255,255,255,0.4); display:block; }
   .diary-cover { flex:1; background:linear-gradient(135deg,#5a2000,#c05020); padding:8px 6px; display:flex; flex-direction:column; gap:5px; }
@@ -305,11 +208,7 @@
   .diary-year span { font-size:8px; color:rgba(255,255,255,0.7); font-weight:700; letter-spacing:1px; }
 
   /* ---- PHARMA LOG BOOK ---- */
-  .logbook {
-    width:80px; height:100px; background:#fff; border-radius:3px 6px 6px 3px;
-    box-shadow:0 6px 20px rgba(0,0,0,0.3); overflow:hidden;
-    display:flex; transform:rotate(3deg);
-  }
+  .logbook { width:80px; height:100px; background:#fff; border-radius:3px 6px 6px 3px; box-shadow:0 6px 20px rgba(0,0,0,0.3); overflow:hidden; display:flex; transform:rotate(3deg); }
   .logbook-spine { width:10px; background:linear-gradient(180deg,#1a0050,#4a0080); }
   .logbook-pages { flex:1; display:flex; flex-direction:column; }
   .logbook-header { height:18px; background:linear-gradient(135deg,#1a0050,#4a0080); display:flex; align-items:center; padding:0 5px; }
@@ -320,12 +219,7 @@
   .log-cell.head { background:#4a0080; opacity:0.15; }
 
   /* ---- HOSPITAL FILE MOCKUP ---- */
-  .hosp-file {
-    width:75px; height:96px; background:#e8f4ff; border-radius:3px 6px 6px 3px;
-    box-shadow:0 6px 20px rgba(0,0,0,0.3); overflow:hidden;
-    display:flex; flex-direction:column;
-    transform:rotate(-4deg);
-  }
+  .hosp-file { width:75px; height:96px; background:#e8f4ff; border-radius:3px 6px 6px 3px; box-shadow:0 6px 20px rgba(0,0,0,0.3); overflow:hidden; display:flex; flex-direction:column; transform:rotate(-4deg); }
   .hosp-file-tab { height:16px; background:linear-gradient(135deg,#003049,#0077b6); width:60%; border-radius:0 0 6px 0; display:flex; align-items:center; padding:0 6px; }
   .hosp-file-tab span { font-size:6px; color:#fff; font-weight:700; letter-spacing:0.5px; }
   .hosp-file-body { flex:1; padding:6px; display:flex; flex-direction:column; gap:4px; }
@@ -376,13 +270,11 @@
   .contact-item { display:flex; align-items:center; gap:7px; color:rgba(255,255,255,0.88); font-size:0.88rem; text-decoration:none; }
   .contact-item:hover { color:#fff; }
 
-  /* FIX 3: CLIENTS SECTION */
+  /* CLIENTS */
   .clients-sec { padding:70px 0; overflow:hidden; }
-  .clients-sec .sec-label,
-  .clients-sec .sec-title { padding:0 5vw; }
+  .clients-sec .sec-label, .clients-sec .sec-title { padding:0 5vw; }
   .scroll-wrap { overflow:hidden; margin-top:40px; position:relative; }
-  .scroll-wrap::before,
-  .scroll-wrap::after { content:''; position:absolute; top:0; bottom:0; width:100px; z-index:2; pointer-events:none; }
+  .scroll-wrap::before, .scroll-wrap::after { content:''; position:absolute; top:0; bottom:0; width:100px; z-index:2; pointer-events:none; }
   .scroll-wrap::before { left:0; background:linear-gradient(to right, var(--paper), transparent); }
   .scroll-wrap::after { right:0; background:linear-gradient(to left, var(--paper), transparent); }
   .scroll-track { display:flex; align-items:center; width:max-content; animation:scrollLeft 35s linear infinite; }
@@ -402,7 +294,6 @@
   .logo-card[data-logo="10"] { background-image:url('./images/logos/logo10.jpeg'); }
   .logo-card[data-logo="11"] { background-image:url('./images/logos/logo11.jpeg'); }
   .logo-card[data-logo="12"] { background-image:url('./images/logos/logo12.jpeg'); }
-  /* Placeholder style when logo image not yet uploaded */
   .logo-card-placeholder { font-size:0.72rem; color:var(--muted); font-weight:500; text-align:center; }
 
   /* LOCATION */
@@ -440,19 +331,307 @@
   @keyframes waPulse { 0%,100%{box-shadow:0 6px 22px rgba(37,211,102,0.4)} 50%{box-shadow:0 6px 34px rgba(37,211,102,0.65)} }
   .wa-float svg { width:28px; height:28px; fill:#fff; }
 
+  /* ==========================================
+     ===== SLIDESHOW MODAL =====
+     ========================================== */
+  .ss-backdrop {
+    position: fixed; inset: 0; z-index: 1000;
+    background: rgba(10,10,10,0.92);
+    backdrop-filter: blur(8px);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; visibility: hidden;
+    transition: opacity 0.35s ease, visibility 0.35s ease;
+  }
+  .ss-backdrop.open { opacity: 1; visibility: visible; }
+
+  .ss-modal {
+    position: relative;
+    width: min(860px, 94vw);
+    background: #121212;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 40px 100px rgba(0,0,0,0.7);
+    transform: translateY(28px) scale(0.97);
+    transition: transform 0.4s cubic-bezier(0.34,1.4,0.64,1);
+  }
+  .ss-backdrop.open .ss-modal { transform: translateY(0) scale(1); }
+
+  /* Top bar */
+  .ss-topbar {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 24px 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .ss-title-block { display: flex; flex-direction: column; gap: 2px; }
+  .ss-service-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem; font-weight: 700; color: #fff;
+  }
+  .ss-slide-counter {
+    font-size: 0.72rem; font-weight: 500; color: rgba(255,255,255,0.4);
+    letter-spacing: 0.06em;
+  }
+  .ss-close {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: rgba(255,255,255,0.07); border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    color: rgba(255,255,255,0.7); font-size: 1.1rem;
+    transition: background 0.2s, color 0.2s;
+  }
+  .ss-close:hover { background: rgba(201,168,76,0.2); color: var(--gold); }
+
+  /* Stage */
+  .ss-stage {
+    position: relative;
+    width: 100%; aspect-ratio: 16/8;
+    overflow: hidden;
+    background: #0d0d0d;
+  }
+
+  .ss-slides-track {
+    display: flex;
+    height: 100%;
+    transition: transform 0.5s cubic-bezier(0.77,0,0.175,1);
+  }
+
+  .ss-slide {
+    min-width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    padding: 32px 48px;
+    gap: 40px;
+  }
+
+  /* Slide visual area */
+  .ss-visual {
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    width: 280px; height: 100%;
+    position: relative;
+  }
+
+  /* Slide info area */
+  .ss-info {
+    flex: 1;
+    display: flex; flex-direction: column; gap: 12px;
+    max-width: 340px;
+  }
+  .ss-slide-tag {
+    display: inline-block; width: fit-content;
+    background: rgba(201,168,76,0.15);
+    color: var(--gold);
+    font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; padding: 4px 12px; border-radius: 20px;
+    border: 1px solid rgba(201,168,76,0.25);
+  }
+  .ss-slide-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.35rem; font-weight: 700;
+    color: #fff; line-height: 1.3;
+  }
+  .ss-slide-desc {
+    font-size: 0.85rem; color: rgba(255,255,255,0.5);
+    line-height: 1.7;
+  }
+  .ss-slide-features {
+    display: flex; flex-direction: column; gap: 6px; margin-top: 4px;
+  }
+  .ss-feat {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 0.79rem; color: rgba(255,255,255,0.65);
+  }
+  .ss-feat::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
+  .ss-wa-cta {
+    display: inline-flex; align-items: center; gap: 8px;
+    margin-top: 8px; width: fit-content;
+    background: #25D366; color: #fff;
+    padding: 10px 20px; border-radius: 6px;
+    font-size: 0.82rem; font-weight: 700;
+    text-decoration: none; transition: 0.2s;
+  }
+  .ss-wa-cta:hover { background: #1da851; transform: translateX(2px); }
+
+  /* Nav arrows */
+  .ss-arr {
+    position: absolute; top: 50%; z-index: 10;
+    width: 44px; height: 44px; border-radius: 50%;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: #fff; font-size: 1.1rem;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s, border-color 0.2s, transform 0.2s;
+    transform: translateY(-50%);
+  }
+  .ss-arr:hover { background: rgba(201,168,76,0.25); border-color: var(--gold); transform: translateY(-50%) scale(1.08); }
+  .ss-arr.prev { left: 12px; }
+  .ss-arr.next { right: 12px; }
+  .ss-arr:disabled { opacity: 0.25; cursor: default; pointer-events: none; }
+
+  /* Dots */
+  .ss-dots {
+    display: flex; align-items: center; justify-content: center;
+    gap: 7px; padding: 14px 0 18px;
+  }
+  .ss-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: rgba(255,255,255,0.2); border: none; cursor: pointer;
+    transition: background 0.25s, width 0.25s, border-radius 0.25s;
+    padding: 0;
+  }
+  .ss-dot.active { background: var(--gold); width: 22px; border-radius: 3px; }
+
+  /* ---- Big CSS product mockups inside slides ---- */
+
+  /* ID Card large */
+  .sl-id-card {
+    width: 110px; height: 155px; background: #fff; border-radius: 10px;
+    box-shadow: 0 12px 36px rgba(0,0,0,0.5);
+    display: flex; flex-direction: column; overflow: hidden;
+  }
+  .sl-id-hdr { height: 42px; display: flex; align-items: center; justify-content: center; }
+  .sl-id-logo { width: 30px; height: 30px; border-radius: 50%; background: rgba(255,255,255,0.35); }
+  .sl-id-bdy { padding: 10px 10px 8px; flex: 1; display: flex; flex-direction: column; gap: 6px; align-items: center; }
+  .sl-id-photo { width: 42px; height: 42px; border-radius: 50%; background: #ddd; border: 3px solid #e85d10; }
+  .sl-id-ln { height: 5px; border-radius: 3px; background: #e0dbd0; width: 82%; }
+  .sl-id-ln.s { width: 58%; background: rgba(201,168,76,0.45); }
+  .sl-id-bc { display: flex; gap: 2px; margin-top: 2px; }
+  .sl-id-bc span { width: 2.5px; height: 13px; background: #333; border-radius: 1px; }
+  .sl-id-bc span:nth-child(even) { height: 9px; }
+
+  /* ID Tag large */
+  .sl-id-tag {
+    width: 80px; height: 108px; background: #fff8f0; border-radius: 6px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+    display: flex; flex-direction: column; align-items: center;
+    padding: 8px 6px; gap: 5px;
+    border-top: 6px solid #e85d10;
+  }
+  .sl-tag-hole { width: 16px; height: 16px; border-radius: 50%; border: 2.5px solid #e85d10; margin-top: -2px; }
+  .sl-tag-str { width: 1px; height: 26px; background: #aaa; margin: -3px auto; }
+  .sl-tag-ln { height: 4px; border-radius: 2px; background: #e0dbd0; width: 80%; }
+  .sl-tag-ln.a { background: #e85d10; width: 62%; }
+
+  /* Lanyard */
+  .sl-lanyard {
+    position: relative; display: flex; flex-direction: column; align-items: center;
+  }
+  .sl-lanyard-cord {
+    width: 60px; height: 50px;
+    border: 3px solid #e85d10;
+    border-bottom: none;
+    border-radius: 30px 30px 0 0;
+  }
+  .sl-lanyard-clip { width: 12px; height: 18px; border: 2.5px solid #888; border-radius: 2px; margin-top: -2px; }
+
+  /* Visiting card large */
+  .sl-vcard {
+    width: 160px; height: 96px; border-radius: 8px;
+    padding: 14px 16px; display: flex; flex-direction: column; gap: 8px;
+    box-shadow: 0 10px 32px rgba(0,0,0,0.5);
+  }
+  .sl-vc-logo { width: 22px; height: 22px; border-radius: 50%; background: linear-gradient(135deg,#e85d10,#c9a84c); }
+  .sl-vc-name { height: 7px; border-radius: 3px; background: rgba(255,255,255,0.85); width: 68%; }
+  .sl-vc-role { height: 4px; border-radius: 2px; background: rgba(255,255,255,0.4); width: 50%; }
+  .sl-vc-div { height: 1px; background: rgba(255,255,255,0.12); margin: 2px 0; }
+  .sl-vc-det { height: 3px; border-radius: 2px; background: rgba(255,255,255,0.25); }
+
+  /* Flyer large */
+  .sl-flyer {
+    width: 120px; height: 165px; border-radius: 6px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    display: flex; flex-direction: column; overflow: hidden;
+    padding: 14px 10px; gap: 7px;
+  }
+  .sl-fl-img { height: 50px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; margin-bottom: 2px; }
+  .sl-fl-title { height: 10px; border-radius: 3px; background: rgba(255,255,255,0.85); width: 80%; }
+  .sl-fl-ln { height: 5px; border-radius: 2px; background: rgba(255,255,255,0.3); }
+  .sl-fl-ln.w60 { width: 60%; }
+  .sl-fl-ln.w80 { width: 80%; }
+  .sl-fl-ln.w45 { width: 45%; }
+
+  /* Brochure large */
+  .sl-brochure {
+    width: 145px; height: 165px;
+    display: flex; border-radius: 6px; overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  }
+  .sl-bro-panel { flex: 1; display: flex; flex-direction: column; padding: 8px 5px; gap: 4px; }
+  .sl-bro-ln { height: 4px; border-radius: 2px; background: rgba(255,255,255,0.4); margin-bottom: 2px; }
+  .sl-bro-acc { height: 24px; border-radius: 3px; margin-top: 6px; }
+
+  /* Letterhead large */
+  .sl-lh {
+    width: 120px; height: 155px; background: #fff; border-radius: 4px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    overflow: hidden; position: relative;
+  }
+  .sl-lh-hdr { height: 30px; display: flex; align-items: center; padding: 0 10px; gap: 7px; }
+  .sl-lh-dot { width: 14px; height: 14px; border-radius: 50%; background: #e85d10; }
+  .sl-lh-txt { flex: 1; height: 5px; border-radius: 2px; background: rgba(255,255,255,0.65); }
+  .sl-lh-gold { height: 3px; background: var(--gold); width: 100%; }
+  .sl-lh-bdy { padding: 10px 10px; display: flex; flex-direction: column; gap: 5px; }
+  .sl-lh-ln { height: 4px; border-radius: 2px; background: #e0dbd0; }
+
+  /* Diary large */
+  .sl-diary {
+    width: 118px; height: 148px; border-radius: 6px 10px 10px 6px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    display: flex; overflow: hidden;
+  }
+  .sl-diary-sp { width: 18px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; }
+  .sl-diary-sp span { width: 8px; height: 1.5px; background: rgba(255,255,255,0.35); display: block; }
+  .sl-diary-cov { flex: 1; padding: 12px 10px; display: flex; flex-direction: column; gap: 6px; }
+  .sl-diary-ttl { height: 8px; border-radius: 3px; background: rgba(255,255,255,0.85); width: 80%; }
+  .sl-diary-sub { height: 4px; border-radius: 2px; background: rgba(255,255,255,0.4); width: 58%; }
+  .sl-diary-yr { margin-top: auto; height: 20px; background: rgba(0,0,0,0.25); border-radius: 4px; display: flex; align-items: center; justify-content: center; }
+  .sl-diary-yr span { font-size: 10px; color: rgba(255,255,255,0.7); font-weight: 700; letter-spacing: 2px; }
+
+  /* Logbook large */
+  .sl-log {
+    width: 128px; height: 155px; background: #fff; border-radius: 4px 8px 8px 4px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5); overflow: hidden;
+    display: flex;
+  }
+  .sl-log-sp { width: 16px; }
+  .sl-log-pg { flex: 1; display: flex; flex-direction: column; }
+  .sl-log-hdr { height: 26px; display: flex; align-items: center; padding: 0 8px; }
+  .sl-log-hdr span { font-size: 7px; color: #fff; font-weight: 700; letter-spacing: 1px; }
+  .sl-log-bdy { flex: 1; padding: 6px 7px; display: flex; flex-direction: column; gap: 4px; }
+  .sl-log-row { display: flex; gap: 4px; }
+  .sl-log-cell { flex: 1; height: 7px; border-radius: 1px; background: #f0eeff; border-bottom: 1px solid #ddd; }
+  .sl-log-cell.h { background: #4a0080; opacity: 0.18; }
+
+  /* Hospital file large */
+  .sl-hosp {
+    width: 110px; height: 148px; background: #e8f4ff; border-radius: 4px 8px 8px 4px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5); overflow: hidden;
+    display: flex; flex-direction: column;
+  }
+  .sl-hosp-tab { height: 22px; width: 58%; border-radius: 0 0 8px 0; display: flex; align-items: center; padding: 0 8px; }
+  .sl-hosp-tab span { font-size: 7px; color: #fff; font-weight: 700; letter-spacing: 0.5px; }
+  .sl-hosp-bdy { flex: 1; padding: 8px; display: flex; flex-direction: column; gap: 5px; }
+  .sl-hosp-rx { height: 26px; border-radius: 4px; border: 1px solid rgba(0,119,182,0.25); display: flex; align-items: center; padding: 0 6px; background: rgba(0,119,182,0.07); }
+  .sl-hosp-rx span { font-size: 14px; font-weight: 900; color: #0077b6; opacity: 0.55; font-style: italic; }
+  .sl-hosp-ln { height: 4px; border-radius: 2px; background: #c5d9ea; }
+
   /* RESPONSIVE */
   @media(max-width:900px){
-    .hero::before{width:0}
-    .hero-right{display:none}
+    .hero::before{width:0} .hero-right{display:none}
     .about-grid{grid-template-columns:1fr}
     .process-steps{grid-template-columns:1fr 1fr}
     .svc-grid{grid-template-columns:1fr 1fr}
     .gal-grid{grid-template-columns:1fr 1fr}
     .gal-item:nth-child(3){grid-column:span 1;aspect-ratio:1}
     .loc-grid{grid-template-columns:1fr}
-    .nav-links{display:none}
-    .hamburger{display:flex}
-    .nav-cta{display:none}
+    .nav-links{display:none} .hamburger{display:flex} .nav-cta{display:none}
+    .ss-slide { padding: 24px 36px; gap: 24px; }
+    .ss-visual { width: 200px; }
+  }
+  @media(max-width:640px){
+    .ss-slide { flex-direction: column; padding: 20px; gap: 16px; aspect-ratio: unset; min-height: 460px; }
+    .ss-stage { aspect-ratio: unset; min-height: 460px; }
+    .ss-visual { width: 100%; height: 200px; }
+    .ss-arr { display: none; }
   }
   @media(max-width:560px){
     .svc-grid{grid-template-columns:1fr}
@@ -470,6 +649,25 @@
     <div class="pre-layer pre-layer-arc"></div>
     <div class="pre-layer pre-layer-image"></div>
     <div class="pre-layer pre-layer-printers"></div>
+  </div>
+</div>
+
+<!-- ===== SLIDESHOW MODAL ===== -->
+<div class="ss-backdrop" id="ssBackdrop" role="dialog" aria-modal="true">
+  <div class="ss-modal" id="ssModal">
+    <div class="ss-topbar">
+      <div class="ss-title-block">
+        <div class="ss-service-name" id="ssServiceName">Service</div>
+        <div class="ss-slide-counter" id="ssCounter">1 / 4</div>
+      </div>
+      <button class="ss-close" id="ssClose" aria-label="Close">✕</button>
+    </div>
+    <div class="ss-stage">
+      <div class="ss-slides-track" id="ssTrack"></div>
+      <button class="ss-arr prev" id="ssPrev" aria-label="Previous">&#8592;</button>
+      <button class="ss-arr next" id="ssNext" aria-label="Next">&#8594;</button>
+    </div>
+    <div class="ss-dots" id="ssDots"></div>
   </div>
 </div>
 
@@ -542,9 +740,7 @@
           <div class="print-line" style="animation-delay:1.8s;width:90%"></div>
           <div class="print-line" style="animation-delay:2.1s;width:95%"></div>
         </div>
-        <div class="about-logo-overlay">
-          <img src="logo.jpg" alt="Image Printers Logo">
-        </div>
+        <div class="about-logo-overlay"><img src="logo.jpg" alt="Image Printers Logo"></div>
         <div class="about-badge"><span class="bn">10+</span><span class="bt">YEARS IN BUSINESS</span></div>
       </div>
     </div>
@@ -574,11 +770,11 @@
 <section id="services">
   <div class="sec-label">What We Print</div>
   <div class="sec-title">Our Printing Services</div>
-  <p class="sec-sub">From everyday business stationery to specialized medical documentation — we handle it all with quality and consistency.</p>
+  <p class="sec-sub">From everyday business stationery to specialized medical documentation — we handle it all with quality and consistency. <strong style="color:var(--gold)">Click any card to explore.</strong></p>
   <div class="svc-grid">
 
     <!-- ID Cards & Tags -->
-    <div class="svc-card">
+    <div class="svc-card" data-service="id-cards">
       <div class="svc-img g1">
         <div class="svc-overlay"></div>
         <div class="mockup-wrap">
@@ -588,9 +784,7 @@
               <div class="id-card-photo"></div>
               <div class="id-card-line"></div>
               <div class="id-card-line short"></div>
-              <div class="id-card-barcode">
-                <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
-              </div>
+              <div class="id-card-barcode"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
             </div>
           </div>
           <div class="id-tag">
@@ -602,12 +796,13 @@
             <div class="id-tag-line accent"></div>
           </div>
         </div>
+        <div class="svc-click-hint">👁 View Samples</div>
       </div>
       <div class="svc-body"><h3>ID Cards &amp; ID Tags</h3><p>Professional PVC and paper ID cards for schools, companies, hospitals &amp; events. Includes lanyards and tags.</p><span class="svc-tag">Popular</span></div>
     </div>
 
     <!-- Flyers & Brochures -->
-    <div class="svc-card">
+    <div class="svc-card" data-service="flyers">
       <div class="svc-img g2">
         <div class="svc-overlay"></div>
         <div class="mockup-wrap">
@@ -632,82 +827,61 @@
             <div class="brochure-panel"><div class="bro-line"></div><div class="bro-accent"></div><div class="bro-line"></div></div>
           </div>
         </div>
+        <div class="svc-click-hint">👁 View Samples</div>
       </div>
       <div class="svc-body"><h3>Flyers &amp; Brochures</h3><p>Eye-catching flyers, leaflets and brochures on premium paper with vibrant, long-lasting inks.</p><span class="svc-tag">High Demand</span></div>
     </div>
 
     <!-- Visiting Cards -->
-    <div class="svc-card">
+    <div class="svc-card" data-service="visiting-cards">
       <div class="svc-img g3">
         <div class="svc-overlay"></div>
         <div class="mockup-wrap">
           <div class="vcard-stack">
-            <div class="vcard">
-              <div class="vcard-logo"></div>
-              <div class="vcard-name"></div>
-              <div class="vcard-detail"></div>
-            </div>
-            <div class="vcard">
-              <div class="vcard-logo"></div>
-              <div class="vcard-name"></div>
-              <div class="vcard-detail"></div>
-            </div>
-            <div class="vcard">
-              <div class="vcard-logo"></div>
-              <div class="vcard-name"></div>
-              <div class="vcard-detail"></div>
-            </div>
+            <div class="vcard"><div class="vcard-logo"></div><div class="vcard-name"></div><div class="vcard-detail"></div></div>
+            <div class="vcard"><div class="vcard-logo"></div><div class="vcard-name"></div><div class="vcard-detail"></div></div>
+            <div class="vcard"><div class="vcard-logo"></div><div class="vcard-name"></div><div class="vcard-detail"></div></div>
           </div>
         </div>
+        <div class="svc-click-hint">👁 View Samples</div>
       </div>
       <div class="svc-body"><h3>Visiting Cards</h3><p>Matte, gloss, spot UV, foil and standard business cards that leave a lasting impression.</p><span class="svc-tag">Best Seller</span></div>
     </div>
 
     <!-- Letter Heads -->
-    <div class="svc-card">
+    <div class="svc-card" data-service="letterheads">
       <div class="svc-img g4">
         <div class="svc-overlay"></div>
         <div class="mockup-wrap" style="gap:10px;">
           <div style="position:relative;">
             <div class="letterhead-2"></div>
             <div class="letterhead" style="position:relative;z-index:1;">
-              <div class="lh-header">
-                <div class="lh-logo-dot"></div>
-                <div class="lh-logo-text"></div>
-              </div>
+              <div class="lh-header"><div class="lh-logo-dot"></div><div class="lh-logo-text"></div></div>
               <div class="lh-body">
                 <div class="lh-gold"></div>
-                <div class="lh-line w90"></div>
-                <div class="lh-line w70"></div>
-                <div class="lh-line w80"></div>
-                <div class="lh-line w50"></div>
-                <div class="lh-line w80"></div>
-                <div class="lh-line w70"></div>
-                <div class="lh-line w90"></div>
+                <div class="lh-line w90"></div><div class="lh-line w70"></div><div class="lh-line w80"></div>
+                <div class="lh-line w50"></div><div class="lh-line w80"></div><div class="lh-line w70"></div><div class="lh-line w90"></div>
               </div>
             </div>
           </div>
         </div>
+        <div class="svc-click-hint">👁 View Samples</div>
       </div>
       <div class="svc-body"><h3>Letter Heads</h3><p>Branded letter heads on premium paper stock — the foundation of professional correspondence.</p><span class="svc-tag">Corporate</span></div>
     </div>
 
     <!-- Diaries & Notebooks -->
-    <div class="svc-card">
+    <div class="svc-card" data-service="diaries">
       <div class="svc-img g7">
         <div class="svc-overlay"></div>
         <div class="mockup-wrap">
           <div class="diary">
-            <div class="diary-spine">
-              <span></span><span></span><span></span><span></span>
-            </div>
+            <div class="diary-spine"><span></span><span></span><span></span><span></span></div>
             <div class="diary-cover">
-              <div class="diary-title"></div>
-              <div class="diary-sub"></div>
+              <div class="diary-title"></div><div class="diary-sub"></div>
               <div class="diary-year"><span>2025</span></div>
             </div>
           </div>
-          <!-- Open pages -->
           <div style="width:60px;height:84px;background:#fff;border-radius:0 5px 5px 0;box-shadow:4px 4px 12px rgba(0,0,0,0.2);padding:8px 6px;display:flex;flex-direction:column;gap:4px;transform:rotate(2deg);">
             <div style="height:3px;background:#f0d090;border-radius:2px;width:90%;"></div>
             <div style="height:3px;background:#eee;border-radius:2px;width:80%;"></div>
@@ -717,12 +891,13 @@
             <div style="height:3px;background:#eee;border-radius:2px;width:75%;"></div>
           </div>
         </div>
+        <div class="svc-click-hint">👁 View Samples</div>
       </div>
       <div class="svc-body"><h3>Diaries &amp; Notebooks</h3><p>Custom branded diaries and notebooks — perfect for corporate gifting or internal office use.</p><span class="svc-tag">Corporate</span></div>
     </div>
 
     <!-- Pharma Log Books -->
-    <div class="svc-card">
+    <div class="svc-card" data-service="pharma">
       <div class="svc-img g5">
         <div class="svc-overlay"></div>
         <div class="mockup-wrap">
@@ -741,12 +916,13 @@
             </div>
           </div>
         </div>
+        <div class="svc-click-hint">👁 View Samples</div>
       </div>
       <div class="svc-body"><h3>Pharma Log Books</h3><p>Compliant, ruled log books for pharma companies with customised formats and company branding.</p><span class="svc-tag">Specialised</span></div>
     </div>
 
     <!-- Hospital & Prescription Files -->
-    <div class="svc-card">
+    <div class="svc-card" data-service="hospital">
       <div class="svc-img g6">
         <div class="svc-overlay"></div>
         <div class="mockup-wrap" style="gap:10px;">
@@ -754,18 +930,12 @@
             <div class="hosp-file-tab"><span>PATIENT FILE</span></div>
             <div class="hosp-file-body">
               <div class="hosp-rx"><span>Rx</span></div>
-              <div class="hosp-line w90"></div>
-              <div class="hosp-line w70"></div>
-              <div class="hosp-line w60"></div>
-              <div class="hosp-line w90"></div>
-              <div class="hosp-line w70"></div>
+              <div class="hosp-line w90"></div><div class="hosp-line w70"></div>
+              <div class="hosp-line w60"></div><div class="hosp-line w90"></div><div class="hosp-line w70"></div>
             </div>
           </div>
-          <!-- Prescription pad -->
           <div style="width:55px;height:80px;background:#fff;border-radius:3px;box-shadow:0 4px 14px rgba(0,0,0,0.25);overflow:hidden;transform:rotate(5deg);">
-            <div style="height:14px;background:linear-gradient(135deg,#003049,#0077b6);display:flex;align-items:center;padding:0 5px;">
-              <span style="font-size:6px;color:#fff;font-weight:700;">PRESCRIPTION</span>
-            </div>
+            <div style="height:14px;background:linear-gradient(135deg,#003049,#0077b6);display:flex;align-items:center;padding:0 5px;"><span style="font-size:6px;color:#fff;font-weight:700;">PRESCRIPTION</span></div>
             <div style="padding:5px 5px;display:flex;flex-direction:column;gap:3px;">
               <div style="font-size:10px;font-weight:900;color:#0077b6;opacity:0.5;font-style:italic;">Rx</div>
               <div style="height:2px;background:#dde;border-radius:1px;width:90%;"></div>
@@ -775,6 +945,7 @@
             </div>
           </div>
         </div>
+        <div class="svc-click-hint">👁 View Samples</div>
       </div>
       <div class="svc-body"><h3>Hospital &amp; Prescription Files</h3><p>Patient files, case sheets, prescription pads, OPD registers, and all clinical documentation.</p><span class="svc-tag">Medical</span></div>
     </div>
@@ -798,13 +969,11 @@
   </div>
 </section>
 
-<!-- FIX 3: CLIENTS SECTION (was linked in nav but missing) -->
 <section id="clients" class="clients-sec">
   <div class="sec-label">Our Clients</div>
   <div class="sec-title">Trusted by Businesses Across Hyderabad</div>
   <div class="scroll-wrap">
     <div class="scroll-track">
-      <!-- First set -->
       <div class="logo-card" data-logo="1"><span class="logo-card-placeholder">Client 1</span></div>
       <div class="logo-card" data-logo="2"><span class="logo-card-placeholder">Client 2</span></div>
       <div class="logo-card" data-logo="3"><span class="logo-card-placeholder">Client 3</span></div>
@@ -820,7 +989,7 @@
       <div class="logo-card" data-logo="13"><span class="logo-card-placeholder">Client 13</span></div>
       <div class="logo-card" data-logo="14"><span class="logo-card-placeholder">Client 14</span></div>
       <div class="logo-card" data-logo="15"><span class="logo-card-placeholder">Client 15</span></div>
-      <!-- Duplicate set for seamless loop -->
+      <!-- Duplicate for loop -->
       <div class="logo-card" data-logo="1"><span class="logo-card-placeholder">Client 1</span></div>
       <div class="logo-card" data-logo="2"><span class="logo-card-placeholder">Client 2</span></div>
       <div class="logo-card" data-logo="3"><span class="logo-card-placeholder">Client 3</span></div>
@@ -873,15 +1042,25 @@
 <footer>
   <div class="footer-top">
     <div class="footer-brand">
-      <div class="f-logo">
-        <img src="logo.jpg" alt="Image Printers">
-        <span>Image Printers</span>
-      </div>
+      <div class="f-logo"><img src="logo.jpg" alt="Image Printers"><span>Image Printers</span></div>
       <p>10+ years of printing excellence in Balkampet, Hyderabad. Your trusted partner for all print needs — from business cards to pharma log books.</p>
     </div>
-    <div class="f-links"><h4>Services</h4><ul><li><a href="#services">ID Cards &amp; Tags</a></li><li><a href="#services">Flyers &amp; Brochures</a></li><li><a href="#services">Visiting Cards</a></li><li><a href="#services">Letter Heads</a></li><li><a href="#services">Diaries</a></li><li><a href="#services">Pharma Log Books</a></li><li><a href="#services">Hospital Stationery</a></li></ul></div>
-    <div class="f-links"><h4>Quick Links</h4><ul><li><a href="#about">About Us</a></li><li><a href="#process">How It Works</a></li><li><a href="#work">Our Work</a></li><li><a href="#clients">Our Clients</a></li><li><a href="https://wa.me/919989263369" target="_blank">WhatsApp Quote</a></li></ul></div>
-    <div class="f-links"><h4>Contact</h4><ul><li><a href="tel:+919989263369">+91 99892 63369</a></li><li><a href="mailto:imageprinters.hyd@gmail.com">imageprinters.hyd@gmail.com</a></li><li><a href="https://share.google/3S5lVhBPm9vmjzSfz" target="_blank">Balkampet, Hyderabad</a></li></ul></div>
+    <div class="f-links"><h4>Services</h4><ul>
+      <li><a href="#services">ID Cards &amp; Tags</a></li><li><a href="#services">Flyers &amp; Brochures</a></li>
+      <li><a href="#services">Visiting Cards</a></li><li><a href="#services">Letter Heads</a></li>
+      <li><a href="#services">Diaries</a></li><li><a href="#services">Pharma Log Books</a></li>
+      <li><a href="#services">Hospital Stationery</a></li>
+    </ul></div>
+    <div class="f-links"><h4>Quick Links</h4><ul>
+      <li><a href="#about">About Us</a></li><li><a href="#process">How It Works</a></li>
+      <li><a href="#work">Our Work</a></li><li><a href="#clients">Our Clients</a></li>
+      <li><a href="https://wa.me/919989263369" target="_blank">WhatsApp Quote</a></li>
+    </ul></div>
+    <div class="f-links"><h4>Contact</h4><ul>
+      <li><a href="tel:+919989263369">+91 99892 63369</a></li>
+      <li><a href="mailto:imageprinters.hyd@gmail.com">imageprinters.hyd@gmail.com</a></li>
+      <li><a href="https://share.google/3S5lVhBPm9vmjzSfz" target="_blank">Balkampet, Hyderabad</a></li>
+    </ul></div>
   </div>
   <div class="footer-bottom">
     <p>&copy; 2024 Image Printers, Balkampet, Hyderabad. All rights reserved.</p>
@@ -896,20 +1075,17 @@ window.addEventListener('load', function() {
     const pre = document.getElementById('preloader');
     pre.classList.add('hidden');
     setTimeout(() => pre.remove(), 600);
-  }, 2800); // stays visible for 2.2s — enough to see full animation
+  }, 2800);
 });
 
 function toggleMenu(){ document.getElementById('mobileMenu').classList.toggle('open'); }
 function closeMenu(){ document.getElementById('mobileMenu').classList.remove('open'); }
-
-/* Close menu on outside click */
 document.addEventListener('click', function(e){
   const nav = document.querySelector('nav');
   const menu = document.getElementById('mobileMenu');
   if(!nav.contains(e.target) && !menu.contains(e.target)) closeMenu();
 });
 
-/* Smooth scroll */
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', function(e) {
     const t = document.querySelector(this.getAttribute('href'));
@@ -917,23 +1093,17 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 });
 
-/* Scroll-in animation for cards and process steps */
 const obs = new IntersectionObserver(entries => {
   entries.forEach(e => { if(e.isIntersecting){ e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; } });
 }, {threshold:0.1});
-
 document.querySelectorAll('.svc-card,.abt-pt,.gal-item').forEach(el => {
   el.style.opacity='0'; el.style.transform='translateY(28px)'; el.style.transition='opacity 0.55s ease,transform 0.55s ease'; obs.observe(el);
 });
-
-/* Process steps: use separate observer to respect CSS transition-delay per child */
 const procObs = new IntersectionObserver(entries => {
   entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); procObs.unobserve(e.target); } });
 }, {threshold:0.2});
-
 document.querySelectorAll('.proc-step').forEach(el => procObs.observe(el));
 
-/* Active nav highlight on scroll */
 window.addEventListener('scroll', function(){
   const sections = document.querySelectorAll('section[id]');
   const navLinks = document.querySelectorAll('.nav-links a');
@@ -943,13 +1113,367 @@ window.addEventListener('scroll', function(){
     l.style.color = l.getAttribute('href') === '#'+current ? 'var(--gold)' : 'var(--ink)';
   });
 });
-
-/* Responsive scroll speed */
 window.addEventListener('resize', function(){
   const t = document.querySelector('.scroll-track');
   if(t) t.style.animationDuration = window.innerWidth < 768 ? '25s' : '35s';
 });
 window.dispatchEvent(new Event('resize'));
+
+/* ==========================================
+   ===== SLIDESHOW SYSTEM =====
+   ========================================== */
+
+/*
+  ============================================================
+  HOW TO ADD YOUR OWN PHOTOS
+  ============================================================
+  Place your images in this folder structure next to index.html:
+
+  images/samples/id-cards/sample1.jpg  (sample2.jpg, sample3.jpg ...)
+  images/samples/flyers/sample1.jpg
+  images/samples/visiting-cards/sample1.jpg
+  images/samples/letterheads/sample1.jpg
+  images/samples/diaries/sample1.jpg
+  images/samples/pharma/sample1.jpg
+  images/samples/hospital/sample1.jpg
+
+  To add more slides: copy an existing slide object and change
+  the `img` path, `heading`, `desc`, `features` and `waText`.
+  ============================================================
+*/
+
+const serviceSlides = {
+
+  'id-cards': {
+    name: 'ID Cards & ID Tags',
+    slides: [
+      {
+        tag: 'School ID',
+        heading: 'Student ID Cards',
+        desc: 'Professional PVC and paper ID cards for schools, companies, hospitals & events. Includes lanyards and tags.',
+        features: ['PVC & paper options', 'Photo ID printing', 'Barcode / QR code', 'Bulk orders welcome'],
+        waText: 'ID+Cards',
+        img: 'images/samples/id-cards/school id.jpg'
+      },
+      {
+        tag: 'Company ID',
+        heading: 'Corporate ID Cards',
+        desc: 'Branded employee cards for offices, hospitals and businesses. Custom format to match your brand identity.',
+        features: ['Logo & brand colours', 'Employee designation', 'Access control ready', 'Hologram options'],
+        waText: 'Corporate+ID+Cards',
+        img: 'images/samples/id-cards/company id.jpg'
+      },
+      {
+        tag: 'Event ID',
+        heading: 'Visitor & Event Tags',
+        desc: 'Printed ID tags and badge holders with lanyards — ideal for events, conferences and visitor management.',
+        features: ['Paper & PVC tags', 'Lanyard printing', 'Event & one-day passes', 'Quick turnaround'],
+        waText: 'ID+Tags+and+Lanyards',
+        img: 'images/samples/id-cards/event id.jpg'
+      }
+    ]
+  },
+
+  'flyers': {
+    name: 'Flyers & Brochures',
+    slides: [
+      {
+        tag: 'Sample 1',
+        heading: 'Promotional Flyers',
+        desc: 'Single-sheet flyers on 130–170gsm art paper with vivid offset or digital printing. Perfect for promotions and events.',
+        features: ['A5, A4, DL sizes', 'Gloss or matte finish', 'Single & double sided', 'Same-day options'],
+        waText: 'Flyers',
+        img: 'images/samples/flyers/sample1.jpg'
+      },
+      {
+        tag: 'Sample 2',
+        heading: 'Tri-Fold Brochures',
+        desc: 'Classic 3-panel brochures for product catalogues, clinic information and company profiles. Premium art paper finish.',
+        features: ['Tri-fold & bi-fold', '130–250gsm paper', 'Full bleed printing', 'Brand-matched design'],
+        waText: 'Brochures',
+        img: 'images/samples/flyers/sample2.jpg'
+      },
+      {
+        tag: 'Sample 3',
+        heading: 'Pamphlets & Leaflets',
+        desc: 'Cost-effective single-sheet leaflets for mass distribution. Great for clinics, pharmacies and retail businesses.',
+        features: ['Budget-friendly', 'High quantity printing', 'Colour or B&W', 'Fast delivery'],
+        waText: 'Pamphlets+and+Leaflets',
+        img: 'images/samples/flyers/sample3.jpg'
+      }
+    ]
+  },
+
+  'visiting-cards': {
+    name: 'Visiting Cards',
+    slides: [
+      {
+        tag: 'Sample 1',
+        heading: 'Classic Business Cards',
+        desc: 'Crisp 300–350gsm cards with sharp colour printing. The timeless professional choice for any business or individual.',
+        features: ['300–350gsm art card', 'Standard 90×54mm', 'Full colour both sides', 'Quick 24hr print'],
+        waText: 'Visiting+Cards',
+        img: 'images/samples/visiting-cards/sample1.jpg'
+      },
+      {
+        tag: 'Sample 2',
+        heading: 'Soft-Touch Matte Cards',
+        desc: 'Luxurious soft-touch lamination gives a velvety feel and understated elegance. A favourite for premium brands.',
+        features: ['Soft-touch lamination', 'Smudge resistant', 'Premium look & feel', 'Ideal for luxury brands'],
+        waText: 'Matte+Business+Cards',
+        img: 'images/samples/visiting-cards/sample2.jpg'
+      },
+      {
+        tag: 'Sample 3',
+        heading: 'Foil & Spot UV Cards',
+        desc: 'Make a bold statement with gold or silver foil stamping and spot UV highlights — designed to impress at first glance.',
+        features: ['Gold & silver foil', 'Spot UV highlights', 'Raised texture effect', 'Special occasion cards'],
+        waText: 'Foil+Spot+UV+Business+Cards',
+        img: 'images/samples/visiting-cards/sample3.jpg'
+      }
+    ]
+  },
+
+  'letterheads': {
+    name: 'Letter Heads',
+    slides: [
+      {
+        tag: 'Sample 1',
+        heading: 'Branded Letterheads',
+        desc: 'Single and double colour letterheads on 70–90gsm premium bond paper. Printed in bulk for offices and organisations.',
+        features: ['Logo & brand design', '70–90gsm bond paper', 'Single & double sided', 'Ream packs available'],
+        waText: 'Letterheads',
+        img: 'images/samples/letterheads/sample1.jpg'
+      },
+      {
+        tag: 'Sample 2',
+        heading: 'Hospital & Clinic Letterheads',
+        desc: 'Letterheads for hospitals, clinics and diagnostic centres — with custom header, registration details, and signature block.',
+        features: ['Doctor/clinic branding', 'Registration number', 'Signature footer', 'MCI compliant format'],
+        waText: 'Hospital+Letterheads',
+        img: 'images/samples/letterheads/sample2.jpg'
+      },
+      {
+        tag: 'Sample 3',
+        heading: 'Branded Envelopes',
+        desc: 'Matching printed envelopes to complement your letterheads — DL, C5, and A4 sizes with logo and return address.',
+        features: ['DL, C5, A4 sizes', 'Logo & address printing', 'Window envelope option', 'Gummed / peel & seal'],
+        waText: 'Printed+Envelopes',
+        img: 'images/samples/letterheads/sample3.jpg'
+      }
+    ]
+  },
+
+  'diaries': {
+    name: 'Diaries & Notebooks',
+    slides: [
+      {
+        tag: 'Sample 1',
+        heading: 'Custom Branded Diaries',
+        desc: 'Elegant hardcover and softcover diaries with your company logo, colours and name — the perfect corporate gift.',
+        features: ['A5 & A4 sizes', 'Hardcover & softcover', 'Custom logo & colour', 'Gold / silver foiling'],
+        waText: 'Custom+Diaries',
+        img: 'images/samples/diaries/sample1.jpg'
+      },
+      {
+        tag: 'Sample 2',
+        heading: 'Custom Notebooks',
+        desc: 'Ruled, plain, and grid notebooks with branded covers. Great for offices, students and gifting purposes.',
+        features: ['A4, A5, pocket sizes', 'Ruled, plain, grid', 'Spiral or perfect bound', 'GSM options: 60–80gsm'],
+        waText: 'Custom+Notebooks',
+        img: 'images/samples/diaries/sample2.jpg'
+      },
+      {
+        tag: 'Sample 3',
+        heading: 'Corporate Gifting Sets',
+        desc: 'Diary + pen + card holder sets with premium packaging — a thoughtful and branded gift for clients and employees.',
+        features: ['Diary + pen combos', 'Gift packaging', 'Custom branding', 'Bulk pricing available'],
+        waText: 'Corporate+Gifting+Diaries',
+        img: 'images/samples/diaries/sample3.jpg'
+      }
+    ]
+  },
+
+  'pharma': {
+    name: 'Pharma Log Books',
+    slides: [
+      {
+        tag: 'Sample 1',
+        heading: 'Narcotics & Drug Registers',
+        desc: 'Compliant ruled registers for tracking controlled substances and dispensing records as per pharmacy regulations.',
+        features: ['Schedule H & X formats', 'Pre-ruled columns', 'Serially numbered', 'Durable covers'],
+        waText: 'Pharma+Drug+Register',
+        img: 'images/samples/pharma/sample1.jpg'
+      },
+      {
+        tag: 'Sample 2',
+        heading: 'Pharma Stock & Inventory Logs',
+        desc: 'Custom columnar books for stock entry, batch tracking, expiry records, and inventory management.',
+        features: ['Custom column layout', 'Batch & expiry columns', 'Opening/closing stock', 'Hardbound & softbound'],
+        waText: 'Pharma+Stock+Register',
+        img: 'images/samples/pharma/sample2.jpg'
+      },
+      {
+        tag: 'Sample 3',
+        heading: 'Hospital OPD & IPD Registers',
+        desc: 'Pre-formatted registers for outpatient and inpatient departments — ready to use with NABH-compatible columns.',
+        features: ['OPD patient entry', 'IPD admission register', 'Serially numbered', 'Logo & hospital branding'],
+        waText: 'OPD+IPD+Registers',
+        img: 'images/samples/pharma/sample3.jpg'
+      }
+    ]
+  },
+
+  'hospital': {
+    name: 'Hospital & Prescription Files',
+    slides: [
+      {
+        tag: 'Sample 1',
+        heading: 'Patient Case Files',
+        desc: 'Branded patient case files for hospitals, clinics and nursing homes — with department tab and doctor notes section.',
+        features: ['Colour department tabs', 'Patient info header', 'Doctor\'s notes section', 'Diagnosis & Rx area'],
+        waText: 'Patient+Case+Files',
+        img: 'images/samples/hospital/sample1.jpg'
+      },
+      {
+        tag: 'Sample 2',
+        heading: 'Doctor Prescription Pads',
+        desc: 'Printed prescription pads with doctor\'s name, qualification, registration, and clinic details. A5 and half-A4 sizes.',
+        features: ['Doctor branding header', 'Reg. no. & MCI number', 'Serial numbered pages', 'Colour & B&W options'],
+        waText: 'Prescription+Pads',
+        img: 'images/samples/hospital/sample2.jpg'
+      },
+      
+    ]
+  }
+};
+
+/* ---- Slideshow engine ---- */
+let ssCurrentService = null;
+let ssCurrentIdx = 0;
+let ssAutoplay = null;
+
+const backdrop = document.getElementById('ssBackdrop');
+const track = document.getElementById('ssTrack');
+const serviceName = document.getElementById('ssServiceName');
+const counter = document.getElementById('ssCounter');
+const dotsContainer = document.getElementById('ssDots');
+const prevBtn = document.getElementById('ssPrev');
+const nextBtn = document.getElementById('ssNext');
+
+function buildSlides(serviceKey) {
+  const data = serviceSlides[serviceKey];
+  if (!data) return;
+  ssCurrentService = serviceKey;
+  ssCurrentIdx = 0;
+  serviceName.textContent = data.name;
+  track.innerHTML = '';
+  dotsContainer.innerHTML = '';
+
+  data.slides.forEach((slide, i) => {
+    const el = document.createElement('div');
+    el.className = 'ss-slide';
+    el.innerHTML = `
+      <div class="ss-visual">
+        <img src="${slide.img}" alt="${slide.heading}"
+          style="width:100%;height:100%;object-fit:cover;border-radius:10px;box-shadow:0 12px 40px rgba(0,0,0,0.5);"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+        <div style="display:none;width:100%;height:100%;border-radius:10px;background:rgba(255,255,255,0.04);border:2px dashed rgba(255,255,255,0.15);align-items:center;justify-content:center;flex-direction:column;gap:10px;">
+          <span style="font-size:2.5rem;opacity:0.4">🖼️</span>
+          <span style="color:rgba(255,255,255,0.3);font-size:0.75rem;text-align:center;padding:0 12px;">Add your photo to<br><code style="color:rgba(201,168,76,0.7);font-size:0.68rem">${slide.img}</code></span>
+        </div>
+      </div>
+      <div class="ss-info">
+        <span class="ss-slide-tag">${slide.tag}</span>
+        <div class="ss-slide-heading">${slide.heading}</div>
+        <div class="ss-slide-desc">${slide.desc}</div>
+        <div class="ss-slide-features">
+          ${slide.features.map(f => `<div class="ss-feat">${f}</div>`).join('')}
+        </div>
+        <a class="ss-wa-cta" href="https://wa.me/919989263369?text=Hi%20Image%20Printers!%20I%20need%20a%20quote%20for%20${slide.waText}" target="_blank">
+          💬 Get a Quote
+        </a>
+      </div>`;
+    track.appendChild(el);
+
+    const dot = document.createElement('button');
+    dot.className = 'ss-dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', 'Go to slide ' + (i+1));
+    dot.addEventListener('click', () => goTo(i));
+    dotsContainer.appendChild(dot);
+  });
+
+  goTo(0);
+  startAutoplay();
+}
+
+function goTo(idx) {
+  const data = serviceSlides[ssCurrentService];
+  if (!data) return;
+  const total = data.slides.length;
+  ssCurrentIdx = Math.max(0, Math.min(idx, total - 1));
+  track.style.transform = `translateX(-${ssCurrentIdx * 100}%)`;
+  counter.textContent = `${ssCurrentIdx + 1} / ${total}`;
+  document.querySelectorAll('.ss-dot').forEach((d, i) => d.classList.toggle('active', i === ssCurrentIdx));
+  prevBtn.disabled = ssCurrentIdx === 0;
+  nextBtn.disabled = ssCurrentIdx === total - 1;
+}
+
+function startAutoplay() {
+  clearAutoplay();
+  ssAutoplay = setInterval(() => {
+    const total = serviceSlides[ssCurrentService]?.slides.length || 1;
+    goTo(ssCurrentIdx < total - 1 ? ssCurrentIdx + 1 : 0);
+  }, 4000);
+}
+
+function clearAutoplay() {
+  if (ssAutoplay) { clearInterval(ssAutoplay); ssAutoplay = null; }
+}
+
+function openSlideshow(serviceKey) {
+  if (!serviceSlides[serviceKey]) return;
+  buildSlides(serviceKey);
+  backdrop.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeSlideshow() {
+  backdrop.classList.remove('open');
+  document.body.style.overflow = '';
+  clearAutoplay();
+}
+
+prevBtn.addEventListener('click', () => { clearAutoplay(); goTo(ssCurrentIdx - 1); startAutoplay(); });
+nextBtn.addEventListener('click', () => { clearAutoplay(); goTo(ssCurrentIdx + 1); startAutoplay(); });
+document.getElementById('ssClose').addEventListener('click', closeSlideshow);
+backdrop.addEventListener('click', (e) => { if (e.target === backdrop) closeSlideshow(); });
+
+/* Keyboard navigation */
+document.addEventListener('keydown', (e) => {
+  if (!backdrop.classList.contains('open')) return;
+  if (e.key === 'Escape') closeSlideshow();
+  if (e.key === 'ArrowLeft') { clearAutoplay(); goTo(ssCurrentIdx - 1); startAutoplay(); }
+  if (e.key === 'ArrowRight') { clearAutoplay(); goTo(ssCurrentIdx + 1); startAutoplay(); }
+});
+
+/* Touch swipe */
+let touchStartX = 0;
+track.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; clearAutoplay(); }, {passive:true});
+track.addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].clientX - touchStartX;
+  if (Math.abs(dx) > 40) goTo(ssCurrentIdx + (dx < 0 ? 1 : -1));
+  startAutoplay();
+}, {passive:true});
+
+/* Bind service cards */
+document.querySelectorAll('.svc-card[data-service]').forEach(card => {
+  const svcImg = card.querySelector('.svc-img');
+  if (svcImg) {
+    svcImg.style.cursor = 'pointer';
+    svcImg.addEventListener('click', () => openSlideshow(card.dataset.service));
+  }
+});
 </script>
 </body>
 </html>
